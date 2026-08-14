@@ -1,0 +1,158 @@
+{
+  "profile_name": "legacy_current_v1",
+  "profile_version": "1.0.0",
+  "sensitivity_factors": {
+    "C1s": 1.0,
+    "F1s": 4.4118
+  },
+  "preprocessing": {
+    "normalization": "max",
+    "background": "asls",
+    "fit_smoothed_data": false,
+    "asls_lambda": 1000000,
+    "asls_p": 0.01,
+    "asls_iterations": 20
+  },
+  "C1s": {
+    "peaks": [
+      {
+        "id": "sp2_C_C",
+        "assignment": "sp2 C-C",
+        "initial_center_eV": 284.2,
+        "center_bounds_eV": [
+          284.0,
+          284.5
+        ],
+        "FWHM_bounds_eV": [
+          0.75,
+          2.0
+        ],
+        "fluorine_coefficient": 0
+      },
+      {
+        "id": "C_CF_sp3",
+        "assignment": "C-CF / sp3 C-C",
+        "initial_center_eV": 285.4,
+        "center_bounds_eV": [
+          285.2,
+          285.7
+        ],
+        "FWHM_bounds_eV": [
+          0.75,
+          2.0
+        ],
+        "fluorine_coefficient": 0
+      },
+      {
+        "id": "C_F",
+        "assignment": "C-F",
+        "initial_center_eV": 288.1,
+        "center_bounds_eV": [
+          287.2,
+          290.0
+        ],
+        "FWHM_bounds_eV": [
+          0.75,
+          2.0
+        ],
+        "fluorine_coefficient": 1
+      },
+      {
+        "id": "C_CF23_C_O",
+        "assignment": "C-CF2,3 / C=O",
+        "initial_center_eV": 288.7,
+        "center_bounds_eV": [
+          288.1,
+          289.5
+        ],
+        "FWHM_bounds_eV": [
+          0.75,
+          2.0
+        ],
+        "fluorine_coefficient": 0,
+        "warning": "Reference position 287.3 eV conflicts with current legacy bounds."
+      },
+      {
+        "id": "CF2",
+        "assignment": "C-F2 / CF2",
+        "initial_center_eV": 290.8,
+        "center_bounds_eV": [
+          290.0,
+          292.9
+        ],
+        "FWHM_bounds_eV": [
+          0.75,
+          2.0
+        ],
+        "fluorine_coefficient": 2
+      },
+      {
+        "id": "CF3",
+        "assignment": "C-F3 / CF3",
+        "initial_center_eV": 292.6,
+        "center_bounds_eV": [
+          292.4,
+          294.6
+        ],
+        "FWHM_bounds_eV": [
+          0.75,
+          2.0
+        ],
+        "fluorine_coefficient": 3
+      }
+    ]
+  },
+  "F1s": {
+    "classification_boundaries_eV": {
+      "ionic_to_semi_covalent": 685.7,
+      "semi_covalent_to_covalent": 687.5
+    },
+    "peaks": [
+      {
+        "id": "F_ionic",
+        "assignment": "ionic or substrate-bound F",
+        "initial_center_eV": 684.7,
+        "center_bounds_eV": [
+          679.0,
+          689.0
+        ],
+        "FWHM_bounds_eV": [
+          0.75,
+          2.0
+        ],
+        "include_in_carbon_bound_F": false,
+        "include_in_total_F": true
+      },
+      {
+        "id": "F_semi_covalent",
+        "assignment": "semi-covalent F-C",
+        "initial_center_eV": 686.7,
+        "center_bounds_eV": [
+          681.0,
+          691.0
+        ],
+        "FWHM_bounds_eV": [
+          0.75,
+          2.0
+        ],
+        "include_in_carbon_bound_F": true,
+        "include_in_total_F": true
+      },
+      {
+        "id": "F_covalent",
+        "assignment": "covalent F-C",
+        "initial_center_eV": 688.2,
+        "center_bounds_eV": [
+          683.0,
+          692.0
+        ],
+        "FWHM_bounds_eV": [
+          0.75,
+          2.0
+        ],
+        "include_in_carbon_bound_F": true,
+        "include_in_total_F": true
+      }
+    ]
+  }
+}

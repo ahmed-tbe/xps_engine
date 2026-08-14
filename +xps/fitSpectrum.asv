@@ -1,0 +1,139 @@
+function [fitResult, y_fit] = fitSpectrum(x, y, peakInit, varargin)
+%FITSPECTRUM Fit bounded peak components to an unsmoothed spectrum.
+
+
+
+x = x(:);
+y = y(:);
+peaksCfg = regionCfg.peaks;
+
+n = numel(peaksCfg);
+p0 = zeros(3*n,1);
+lb = zeros(3*n,1);
+ub = zeros(3*n,1);
+
+% Calculate a positive-area estimate that is independent
+% of whether binding energy increases or decreases.
+[xInt, sortIdx] = sort(x);
+yInt = y(sortIdx);
+totalPositiveArea = trapz(xInt, max(yInt, 0));
+
+fprintf('\n--- Fit initialization ---\n');
+fprintf('Energy range: %.3f to %.3f eV\n', min(x), max(x));
+fprintf('Total positive area: %.6f\n', totalPositiveArea);
+fprintf('Initial area per peak: %.6f\n', totalPositiveArea/n);
+fprintf('Area upper bound: %.6f\n', max(10*totalPositiveArea,1));
+
+% Helper function to handle indexing whether peaksCfg is a struct array or cell array
+if iscell(peaksCfg)
+    getPeak = @(i) peaksCfg{i};
+else
+    getPeak = @(i) peaksCfg(i);
+end
+
+for i = 1:n
+    pk = getPeak(i);
+    j = 3*(i-1)+1;
+    p0(j)   = pk.initial_center_eV;
+    p0(j+1) = mean(pk.FWHM_bounds_eV);
+    p0(j+2) = max(totalPositiveArea / n, eps);
+    lb(j)   = pk.center_bounds_eV(1);
+    ub(j)   = pk.center_bounds_eV(2);
+    lb(j+1) = pk.FWHM_bounds_eV(1);
+    ub(j+1) = pk.FWHM_bounds_eV(2);
+    lb(j+2) = 0;
+    ub(j+2) = max(10*totalPositiveArea, 1);
+end
+
+model = @(p) buildModel(x,p,peakShape);
+resid = @(p) model(p)-y;
+opts = optimoptions("lsqnonlin", ...
+    "Display","off", ...
+    "MaxFunctionEvaluations",5e4, ...
+    "MaxIterations",2e3);
+[p,resnorm,residual,exitflag,output,~,~] = ...
+    lsqnonlin(resid,p0,lb,ub,opts);
+fitY = model(p);
+
+R.initialParams = p0;
+R.lowerBounds = lb;
+R.upperBounds = ub;
+R.finalParams = p;
+R.totalPositiveArea = totalPositiveArea;
+
+R.energy = x;
+R.observed = y;
+R.fitted = fitY;
+R.residual = residual;
+R.exitflag = exitflag;
+R.output = output;
+R.resnorm = resnorm;
+R.peaks = repmat(struct(),n,1);
+R.warnings = strings(0,1);
+
+for i = 1:n
+    pk = getPeak(i);
+    j = 3*(i-1)+1;
+    R.peaks(i).id = string(pk.id);
+    R.peaks(i).assignment = string(pk.assignment);
+    R.peaks(i).center_eV = p(j);
+    R.peaks(i).FWHM_eV = p(j+1);
+    R.peaks(i).area = p(j+2);
+
+    R.peaks(i).initial_center_eV = p0(j);
+    R.peaks(i).initial_FWHM_eV = p0(j+1);
+    R.peaks(i).initial_area = p0(j+2);
+    
+    R.peaks(i).center_lower_bound = lb(j);
+    R.peaks(i).center_upper_bound = ub(j);
+    
+    R.peaks(i).FWHM_lower_bound = lb(j+1);
+    R.peaks(i).FWHM_upper_bound = ub(j+1);
+    
+    R.peaks(i).area_lower_bound = lb(j+2);
+    R.peaks(i).area_upper_bound = ub(j+2);
+
+    R.peaks(i).area_fraction = p(j+2)/sum(p(3:3:end));
+    R.peaks(i).curve = componentCurve(x,p(j),p(j+1),p(j+2),peakShape);
+    
+    tolC = 0.02*(ub(j)-lb(j));
+    tolW = 0.02*(ub(j+1)-lb(j+1));
+    tolA = 0.02*(ub(j+2)-lb(j+2));
+    if abs(p(j)-lb(j)) <= tolC || abs(ub(j)-p(j)) <= tolC
+        R.warnings(end+1) = "Center near bound: " + R.peaks(i).id;
+    end
+    if abs(p(j+1)-lb(j+1)) <= tolW || abs(ub(j+1)-p(j+1)) <= tolW
+        R.warnings(end+1) = "FWHM near bound: " + R.peaks(i).id;
+    end
+    if p(j+2) <= 1e-8
+        R.warnings(end+1) = "Extremely small area: " + R.peaks(i).id;
+    end
+    if abs(p(j+2)-lb(j+2)) <= tolA || abs(ub(j+2)-p(j+2)) <= tolA
+        R.warnings(end+1) = "Area near bound: " + R.peaks(i).id;
+    end
+end
+
+R.metrics = xps.calculateFitMetrics(y,fitY,3*n);
+end
+
+function yhat = buildModel(x,p,shape)
+n = numel(p)/3;
+yhat = zeros(size(x));
+for i = 1:n
+    j = 3*(i-1)+1;
+    yhat = yhat + componentCurve(x,p(j),p(j+1),p(j+2),shape);
+end
+end
+
+function y = componentCurve(x,c,fwhm,area,shape)
+sigma = fwhm/(2*sqrt(2*log(2)));
+switch lower(string(shape))
+    case "gaussian"
+        y = area/(sigma*sqrt(2*pi)) .* exp(-0.5*((x-c)/sigma).^2);
+    case "lorentzian"
+        gamma = fwhm/2;
+        y = area/pi .* gamma ./ ((x-c).^2 + gamma^2);
+    otherwise
+        error("Unsupported peak shape '%s'.",shape);
+end
+end
