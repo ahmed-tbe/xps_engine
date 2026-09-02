@@ -6,6 +6,9 @@ function comp = calculateComposition(c1sPeaks,f1sPeaks,SC,SF,alpha)
 %   F at.% = (F/C)/(1+F/C)*100
 %
 % The first milestone locks alpha=0 and the legacy C1s expression.
+% The F1s/C1s outputs are only physically quantitative when their input
+% areas share a restored acquisition scale; this function does not infer
+% that scale from independently normalized spectra.
 
 if nargin < 3 || isempty(SC), SC = 1.0; end
 if nargin < 4 || isempty(SF), SF = 4.4118; end
@@ -53,6 +56,8 @@ comp.areas = struct( ...
     "A_F_total",AfTotal);
 
 comp.sensitivityFactors = struct("SC",SC,"SF",SF);
+comp.crossRegionAreaScaleStatus = ...
+    "caller must restore any independent preprocessing scales before using F1s/C1s ratios physically";
 end
 
 function out = ratioFields(FC)

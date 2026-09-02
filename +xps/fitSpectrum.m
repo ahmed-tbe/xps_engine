@@ -1,134 +1,175 @@
-function [fitResult, y_fit] = fitSpectrum(x, y, peakInit, varargin)
-% FITSPECTRUM Fits Gaussian peak components to XPS spectral data.
-% Core production fitter for the XPS analysis pipeline.
+function R = fitSpectrum(x, y, regionCfg, peakShape)
+%FITSPECTRUM Fit configured, bounded XPS peak components to a spectrum.
 %
-% INPUTS:
-%   x        - Binding energy vector (eV)
-%   y        - Intensity vector
-%   peakInit - Matrix [N x 3]: [Center, Area, FWHM] for N peaks
-%
-% OPTIONAL PARAMETERS (Name-Value pairs):
-%   'BackgroundType' - 'none' (default), 'constant', or 'linear'
-%   'CenterBounds'   - Max shift allowed for center (+/- eV, default: 0.5)
-%   'FWHMBounds'      - [minFWHM, maxFWHM] in eV (default: [0.4, 2.5])
+% R = xps.fitSpectrum(x, y, regionCfg, peakShape) consumes one region
+% configuration decoded from config JSON (with a .peaks field) and returns
+% the result schema consumed by the plotting and composition stages.
 
-    % --- 1. Parse Input Options ---
-    p = inputParser;
-    addRequired(p, 'x');
-    addRequired(p, 'y');
-    addRequired(p, 'peakInit');
-    addParameter(p, 'BackgroundType', 'none', @(s) ismember(s, {'none', 'constant', 'linear'}));
-    addParameter(p, 'CenterBounds', 0.5, @isnumeric);
-    addParameter(p, 'FWHMBounds', [0.4, 2.5], @isnumeric);
-    parse(p, x, y, peakInit, varargin{:});
-    
-    bkgType     = p.Results.BackgroundType;
-    centerTol   = p.Results.CenterBounds;
-    fwhmLimits  = p.Results.FWHMBounds;
-
-    % Format vectors
-    x = x(:);
-    y = y(:);
-    numPeaks = size(peakInit, 1);
-    dx = mean(diff(x));
-
-    % --- 2. Construct Initial Vector (x0), Lower (lb), and Upper (ub) Bounds ---
-    % Base peak parameters: [Centers (1..N), Sigmas (N+1..2N), Areas (2N+1..3N)]
-    x0 = zeros(3*numPeaks, 1);
-    lb = zeros(3*numPeaks, 1);
-    ub = zeros(3*numPeaks, 1);
-
-    for i = 1:numPeaks
-        x0(i)              = peakInit(i, 1);                          % Center
-        x0(numPeaks + i)    = peakInit(i, 3) / (2 * sqrt(2*log(2)));  % Sigma
-        x0(2*numPeaks + i)   = peakInit(i, 2);                        % Area
-
-        lb(i)              = peakInit(i, 1) - centerTol;
-        ub(i)              = peakInit(i, 1) + centerTol;
-        lb(numPeaks + i)    = fwhmLimits(1) / (2 * sqrt(2*log(2)));
-        ub(numPeaks + i)    = fwhmLimits(2) / (2 * sqrt(2*log(2)));
-        lb(2*numPeaks + i)   = 0;
-        ub(2*numPeaks + i)   = sum(y) * abs(dx) * 3; % Physical upper bound
-    end
-
-    % Append Background Parameters to State Vector
-    switch bkgType
-        case 'none'
-            % No extra state parameters
-        case 'constant'
-            x0 = [x0; min(y)];
-            lb = [lb; 0];
-            ub = [ub; max(y)];
-        case 'linear'
-            x0 = [x0; min(y); 0]; % [b0 (offset), b1 (slope)]
-            lb = [lb; 0; -10];
-            ub = [ub; max(y); 10];
-    end
-
-    % --- 3. Non-Linear Least Squares Optimization ---
-    opts = optimoptions('lsqcurvefit', ...
-        'Display', 'off', ...
-        'MaxFunctionEvaluations', 50000, ...
-        'MaxIterations', 2000, ...
-        'FunctionTolerance', 1e-8, ...
-        'StepTolerance', 1e-8);
-
-    p_opt = lsqcurvefit(@(p, xdata) evalSpectrumModel(p, xdata, numPeaks, bkgType), ...
-                       x0, x, y, lb, ub, opts);
-
-    % --- 4. Unpack Results ---
-    y_fit = evalSpectrumModel(p_opt, x, numPeaks, bkgType);
-
-    fitResult.numPeaks = numPeaks;
-    fitResult.centers  = p_opt(1:numPeaks);
-    fitResult.sigmas   = p_opt(numPeaks+1 : 2*numPeaks);
-    fitResult.fwhms    = fitResult.sigmas * (2 * sqrt(2 * log(2)));
-    fitResult.areas    = p_opt(2*numPeaks+1 : 3*numPeaks);
-    
-    % Total area normalized fractions (%)
-    fitResult.areaPercents = (fitResult.areas / sum(fitResult.areas)) * 100;
-
-    % Background Parameters
-    fitResult.bkgType = bkgType;
-    if strcmp(bkgType, 'constant')
-        fitResult.bkgOffset = p_opt(3*numPeaks + 1);
-        fitResult.bkgSlope  = 0;
-        fitResult.y_bkg     = repmat(fitResult.bkgOffset, size(x));
-    elseif strcmp(bkgType, 'linear')
-        fitResult.bkgOffset = p_opt(3*numPeaks + 1);
-        fitResult.bkgSlope  = p_opt(3*numPeaks + 2);
-        fitResult.y_bkg     = fitResult.bkgOffset + fitResult.bkgSlope * (x - min(x));
-    else
-        fitResult.bkgOffset = 0;
-        fitResult.bkgSlope  = 0;
-        fitResult.y_bkg     = zeros(size(x));
-    end
-
-    % Goodness of Fit Statistics
-    ss_res = sum((y - y_fit).^2);
-    ss_tot = sum((y - mean(y)).^2);
-    fitResult.R2   = 1 - (ss_res / ss_tot);
-    fitResult.RMSE = sqrt(ss_res / length(y));
+arguments
+    x (:,1) double
+    y (:,1) double
+    regionCfg (1,1) struct
+    peakShape (1,1) string = "gaussian"
 end
 
-% --- Internal Model Evaluator ---
-function y_eval = evalSpectrumModel(p, x, numPeaks, bkgType)
-    y_eval = zeros(size(x));
-    
-    % Evaluate Background
-    if strcmp(bkgType, 'constant')
-        y_eval = y_eval + p(3*numPeaks + 1);
-    elseif strcmp(bkgType, 'linear')
-        b0 = p(3*numPeaks + 1);
-        b1 = p(3*numPeaks + 2);
-        y_eval = y_eval + b0 + b1 * (x - min(x));
+if ~isfield(regionCfg, "peaks") || isempty(regionCfg.peaks)
+    error("xps:fitSpectrum:MissingPeaks", ...
+        "regionCfg must contain a nonempty 'peaks' configuration field.");
+end
+if numel(x) ~= numel(y)
+    error("xps:fitSpectrum:SizeMismatch", "x and y must have the same length.");
+end
+
+peaksCfg = regionCfg.peaks;
+n = numel(peaksCfg);
+p0 = zeros(3*n,1);
+lb = zeros(3*n,1);
+ub = zeros(3*n,1);
+
+% This is a deliberately loose numerical initialization/bound heuristic,
+% not a Ruoff-derived physical constraint. It is evaluated in the
+% preprocessing scale. P.scale is retained by the caller for later
+% cross-region quantification.
+[xInt, sortIdx] = sort(x);
+yInt = y(sortIdx);
+totalPositiveArea = trapz(xInt, max(yInt, 0));
+areaUpperBound = max(10 * totalPositiveArea, 1);
+
+for i = 1:n
+    pk = configuredPeak(peaksCfg, i);
+    j = 3*(i-1)+1;
+    p0(j) = pk.initial_center_eV;
+    p0(j+1) = mean(pk.FWHM_bounds_eV);
+    p0(j+2) = max(totalPositiveArea/n, eps);
+    lb(j) = pk.center_bounds_eV(1);
+    ub(j) = pk.center_bounds_eV(2);
+    lb(j+1) = pk.FWHM_bounds_eV(1);
+    ub(j+1) = pk.FWHM_bounds_eV(2);
+    lb(j+2) = 0;
+    ub(j+2) = areaUpperBound;
+end
+
+model = @(p) buildModel(x, p, peakShape);
+resid = @(p) model(p) - y;
+opts = optimoptions("lsqnonlin", ...
+    "Display", "off", ...
+    "MaxFunctionEvaluations", 5e4, ...
+    "MaxIterations", 2e3);
+[p,resnorm,residual,exitflag,output] = lsqnonlin(resid,p0,lb,ub,opts);
+fitY = model(p);
+
+R.initialParams = p0;
+R.lowerBounds = lb;
+R.upperBounds = ub;
+R.finalParams = p;
+R.totalPositiveArea = totalPositiveArea;
+R.energy = x;
+R.observed = y;
+R.fitted = fitY;
+R.residual = residual;
+R.exitflag = exitflag;
+R.output = output;
+R.resnorm = resnorm;
+R.fitParameterCount = 3*n;
+R.areaUpperBoundHeuristic = areaUpperBound;
+R.areaFractionDefinition = ...
+    "fraction of fitted peak area within this spectral region";
+R.peaks = repmat(struct(),n,1);
+R.warnings = strings(0,1);
+
+for i = 1:n
+    pk = configuredPeak(peaksCfg, i);
+    j = 3*(i-1)+1;
+    R.peaks(i).id = string(pk.id);
+    R.peaks(i).assignment = string(pk.assignment);
+    R.peaks(i).center_eV = p(j);
+    R.peaks(i).FWHM_eV = p(j+1);
+    R.peaks(i).area = p(j+2);
+    R.peaks(i).initial_center_eV = p0(j);
+    R.peaks(i).initial_FWHM_eV = p0(j+1);
+    R.peaks(i).initial_area = p0(j+2);
+    R.peaks(i).center_lower_bound = lb(j);
+    R.peaks(i).center_upper_bound = ub(j);
+    R.peaks(i).FWHM_lower_bound = lb(j+1);
+    R.peaks(i).FWHM_upper_bound = ub(j+1);
+    R.peaks(i).area_lower_bound = lb(j+2);
+    R.peaks(i).area_upper_bound = ub(j+2);
+    R.peaks(i).area_fraction = p(j+2)/sum(p(3:3:end));
+    R.peaks(i).curve = componentCurve(x,p(j),p(j+1),p(j+2),peakShape);
+
+    tolC = 0.02*(ub(j)-lb(j));
+    tolW = 0.02*(ub(j+1)-lb(j+1));
+    tolA = 0.02*(ub(j+2)-lb(j+2));
+    hitTolC = sqrt(eps)*max(1,ub(j)-lb(j));
+    hitTolW = sqrt(eps)*max(1,ub(j+1)-lb(j+1));
+    hitTolA = sqrt(eps)*max(1,ub(j+2)-lb(j+2));
+    R.peaks(i).center_at_bound = ...
+        abs(p(j)-lb(j)) <= hitTolC || abs(ub(j)-p(j)) <= hitTolC;
+    R.peaks(i).FWHM_at_bound = ...
+        abs(p(j+1)-lb(j+1)) <= hitTolW || abs(ub(j+1)-p(j+1)) <= hitTolW;
+    R.peaks(i).area_at_bound = ...
+        abs(p(j+2)-lb(j+2)) <= hitTolA || abs(ub(j+2)-p(j+2)) <= hitTolA;
+    R.peaks(i).center_near_bound = ...
+        ~R.peaks(i).center_at_bound && ...
+        (abs(p(j)-lb(j)) <= tolC || abs(ub(j)-p(j)) <= tolC);
+    R.peaks(i).FWHM_near_bound = ...
+        ~R.peaks(i).FWHM_at_bound && ...
+        (abs(p(j+1)-lb(j+1)) <= tolW || abs(ub(j+1)-p(j+1)) <= tolW);
+    R.peaks(i).area_near_bound = ...
+        ~R.peaks(i).area_at_bound && ...
+        (abs(p(j+2)-lb(j+2)) <= tolA || abs(ub(j+2)-p(j+2)) <= tolA);
+
+    if R.peaks(i).center_at_bound
+        R.warnings(end+1) = "Center at bound: " + R.peaks(i).id;
+    elseif R.peaks(i).center_near_bound
+        R.warnings(end+1) = "Center near bound: " + R.peaks(i).id;
     end
-    
-    % Add Gaussian Peak Components
-    for i = 1:numPeaks
-        c   = p(i);
-        sig = p(numPeaks + i);
-        a   = p(2*numPeaks + i);
-        y_eval = y_eval + (a / (sig * sqrt(2*pi))) * exp(-0.5 * ((x - c)/sig).^2);
+    if R.peaks(i).FWHM_at_bound
+        R.warnings(end+1) = "FWHM at bound: " + R.peaks(i).id;
+    elseif R.peaks(i).FWHM_near_bound
+        R.warnings(end+1) = "FWHM near bound: " + R.peaks(i).id;
     end
+    if p(j+2) <= 1e-8
+        R.warnings(end+1) = "Extremely small area: " + R.peaks(i).id;
+    elseif R.peaks(i).area_at_bound
+        R.warnings(end+1) = "Area at bound: " + R.peaks(i).id;
+    elseif R.peaks(i).area_near_bound
+        R.warnings(end+1) = "Area near bound: " + R.peaks(i).id;
+    end
+end
+
+R.metrics = xps.calculateFitMetrics(y,fitY,3*n);
+end
+
+function pk = configuredPeak(peaksCfg, index)
+% JSON decoding can produce either a struct array or a cell array of
+% structs, depending on MATLAB release and JSON structure.
+if iscell(peaksCfg)
+    pk = peaksCfg{index};
+else
+    pk = peaksCfg(index);
+end
+end
+
+function yhat = buildModel(x,p,shape)
+n = numel(p)/3;
+yhat = zeros(size(x));
+for i = 1:n
+    j = 3*(i-1)+1;
+    yhat = yhat + componentCurve(x,p(j),p(j+1),p(j+2),shape);
+end
+end
+
+function y = componentCurve(x,c,fwhm,area,shape)
+switch lower(shape)
+    case "gaussian"
+        sigma = fwhm/(2*sqrt(2*log(2)));
+        y = area/(sigma*sqrt(2*pi)) .* exp(-0.5*((x-c)/sigma).^2);
+    case "lorentzian"
+        gamma = fwhm/2;
+        y = area/pi .* gamma ./ ((x-c).^2 + gamma^2);
+    otherwise
+        error("xps:fitSpectrum:UnsupportedShape", ...
+            "Unsupported peak shape '%s'.", shape);
+end
 end

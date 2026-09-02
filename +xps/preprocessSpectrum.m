@@ -1,13 +1,15 @@
 function P = preprocessSpectrum(S, settings)
 %PREPROCESSSPECTRUM Initial preprocessing from the tuning report.
 %
-% - maximum-intensity normalization
+% - maximum-intensity normalization (when configured)
 % - smooth AsLS background
 % - fit the unsmoothed spectrum
 %
-% Cross-region elemental quantification should NOT blindly use independently
-% normalized C1s and F1s areas. That issue is intentionally left explicit
-% for the later C1s/F1s milestone.
+% P.scale is the raw maximum intensity used for yNorm = y/P.scale. Thus a
+% fitted area in P.y_fit units must be multiplied by P.scale to return to
+% the raw-intensity scale (provided the background subtraction is treated
+% consistently). Cross-region elemental quantification must not blindly
+% divide independently normalized C1s and F1s areas.
 
 x = S.energyFit;
 y = S.intensityFit;
