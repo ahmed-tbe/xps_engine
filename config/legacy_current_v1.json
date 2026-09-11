@@ -1,6 +1,7 @@
 {
   "profile_name": "legacy_current_v1",
   "profile_version": "1.0.0",
+  "peak_shape": "gaussian",
   "sensitivity_factors": {
     "C1s": 1.0,
     "F1s": 4.4118
@@ -9,9 +10,31 @@
     "normalization": "max",
     "background": "asls",
     "fit_smoothed_data": false,
+    "linear_n_points": 5,
+    "shirley_n_points": 5,
+    "shirley_max_iterations": 50,
+    "shirley_tolerance": 0.00001,
     "asls_lambda": 1000000,
     "asls_p": 0.01,
-    "asls_iterations": 20
+    "asls_iterations": 20,
+    "tougaard_B": 2866,
+    "tougaard_C": 1643
+  },
+  "composition": {
+    "alpha_ambiguous": 0.0
+  },
+  "acquisition_scaling": {
+    "definition": "recorded_raw_area = physical_area * acquisition_scale_factor",
+    "C1s": {
+      "known": false,
+      "scale_factor": null,
+      "provenance": "Not present in the two-column Sample A file, project configuration, or tuning report."
+    },
+    "F1s": {
+      "known": false,
+      "scale_factor": null,
+      "provenance": "Not present in the two-column Sample A file, project configuration, or tuning report."
+    }
   },
   "C1s": {
     "peaks": [

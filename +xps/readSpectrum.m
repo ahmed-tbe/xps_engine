@@ -24,6 +24,14 @@ S.energy = M(:,1);
 S.intensity = M(:,2);
 S.originalOrder = (1:size(M,1)).';
 S.energyDirection = sign(S.energy(end)-S.energy(1));
+S.sourceFile = string(filename);
+% A plain two-column spectrum contains no independently interpretable
+% dwell-time, pass-energy, scan-count, transmission, or other acquisition
+% correction metadata. Callers must obtain those factors externally before
+% treating a C1s/F1s ratio as physical quantification.
+S.acquisitionMetadataAvailable = false;
+S.acquisitionMetadataStatus = ...
+    "two-column file contains energy and intensity only";
 
 % For fitting, use ascending energy internally. Do not overwrite the raw
 % values; preserve the original arrays above.

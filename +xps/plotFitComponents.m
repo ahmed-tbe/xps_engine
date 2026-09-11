@@ -6,7 +6,12 @@ tiledlayout(2,1);
 
 nexttile;
 plot(P.energy,P.normalized,"k.","DisplayName","normalized raw"); hold on;
-plot(P.energy,P.background,"DisplayName","AsLS background");
+if isfield(P,"background_method")
+    backgroundLabel = P.background_method + " background";
+else
+    backgroundLabel = "background";
+end
+plot(P.energy,P.background,"DisplayName",backgroundLabel);
 plot(P.energy,P.y_fit,"DisplayName","background-subtracted");
 
 for i=1:numel(R.peaks)

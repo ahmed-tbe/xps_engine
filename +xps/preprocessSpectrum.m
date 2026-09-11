@@ -2,43 +2,46 @@ function P = preprocessSpectrum(S, settings)
 %PREPROCESSSPECTRUM Initial preprocessing from the tuning report.
 %
 % - maximum-intensity normalization (when configured)
-% - smooth AsLS background
+% - configured background estimator (AsLS, linear, Shirley, or Tougaard)
 % - fit the unsmoothed spectrum
 %
-% P.scale is the raw maximum intensity used for yNorm = y/P.scale. Thus a
-% fitted area in P.y_fit units must be multiplied by P.scale to return to
-% the raw-intensity scale (provided the background subtraction is treated
-% consistently). Cross-region elemental quantification must not blindly
-% divide independently normalized C1s and F1s areas.
+% P.softwareNormalizationScale is the numerical divisor used for
+% yNorm = y/P.softwareNormalizationScale. A fitted area must be multiplied
+% by that value to return to recorded raw-intensity units. This does not
+% correct experimental/acquisition scaling or XPS sensitivity factors.
 
 x = S.energyFit;
 y = S.intensityFit;
 
-if strcmpi(settings.normalization,"max")
-    scale = max(y);
-    if scale == 0
-        error("Cannot max-normalize a zero spectrum.");
-    end
-    yNorm = y/scale;
-else
-    scale = 1;
-    yNorm = y;
+normalizationMethod = lower(string(settings.normalization));
+switch normalizationMethod
+    case "max"
+        scale = max(y);
+        if ~isfinite(scale) || scale <= 0
+            error("xps:preprocessSpectrum:InvalidScale", ...
+                "Cannot max-normalize a spectrum with nonpositive/nonfinite maximum.");
+        end
+        yNorm = y/scale;
+    case "none"
+        scale = 1;
+        yNorm = y;
+    otherwise
+        error("xps:preprocessSpectrum:UnsupportedNormalization", ...
+            "Normalization '%s' is not supported.", normalizationMethod);
 end
 
-switch lower(settings.background)
-    case "asls"
-        bkg = xps.estimateAsLS(yNorm, ...
-            settings.asls_lambda, settings.asls_p, settings.asls_iterations);
-    otherwise
-        error("Background '%s' is not implemented in this milestone.", ...
-            settings.background);
-end
+[bkg, backgroundInfo] = xps.estimateBackground(x, yNorm, settings);
 
 P.energy = x;
 P.raw = y;
 P.normalized = yNorm;
 P.background = bkg;
 P.y_fit = yNorm - bkg;
+P.normalization_method = normalizationMethod;
+P.softwareNormalizationScale = scale;
 P.scale = scale;
+P.background_method = backgroundInfo.method;
+P.background_parameters = backgroundInfo.parameters;
+P.preprocessing_settings = settings;
 P.original = S;
 end

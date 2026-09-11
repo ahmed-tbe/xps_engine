@@ -14,7 +14,9 @@ For one Ruoff sample, reproduce the current six-component C1s / three-component 
 - C/F
 - CxF
 
-The Ruoff reference value is **not used as a fitting constraint**.
+The Ruoff reference values are **not used as fitting constraints**. Direct
+Sample A references live in `reference/sample_A_ruoff_v1.json`; model values
+derived from those peak fractions are calculated and labeled separately.
 
 ## Important distinction
 
@@ -33,7 +35,8 @@ From the supplied tuning report:
 - C1s: six components
 - F1s: three components
 - normalization: max intensity
-- background: AsLS
+- versioned default background: AsLS
+- supported configured backgrounds: linear, Shirley, AsLS, and Tougaard
 - fit unsmoothed data
 - S_C = 1.0
 - S_F = 4.4118
@@ -42,15 +45,22 @@ From the supplied tuning report:
 
 The supplied report says the exact historical XPS Fit Lab peak shape is not documented in the material we have. This starter therefore exposes the peak shape explicitly and defaults to Gaussian because that is the current lab-development assumption. Do not call this the verified historical XPS Fit Lab implementation until the peak shape is confirmed.
 
-## Run
+## Run the standardized Sample A benchmark
 
 Put this folder on the MATLAB path and run:
 
 ```matlab
-runSingleSample
+report = runSampleABenchmark("linear");
 ```
 
-Keep `C1s_A(1).txt` and `F1s_A(1).txt` in the project root, or change the paths in `runSingleSample.m`.
+The explicit `"linear"` argument is a local exploratory choice. It does not
+change the JSON default. `runSingleSample.m` remains as a compatibility entry
+point and calls the same benchmark engine.
+
+The supplied Sample A files contain energy and intensity columns only. The
+software max-normalization divisors are recorded and reversed, but C1s/F1s
+acquisition scaling is not present. Therefore the benchmark withholds physical
+cross-region F/C until acquisition factors and provenance are supplied.
 
 ## Required MATLAB toolbox
 
@@ -60,7 +70,7 @@ Optimization Toolbox (`lsqnonlin`).
 
 1. Are the raw spectra imported correctly?
 2. Does the energy direction look correct?
-3. Does the AsLS background look sensible?
+3. Does the explicitly selected background look sensible?
 4. Do the fitted centers/FWHMs look chemically reasonable?
 5. Are any parameters pinned to bounds?
 6. Does the C1s legacy calculation reproduce the known legacy result once the fitted areas are matched?
@@ -71,10 +81,13 @@ Optimization Toolbox (`lsqnonlin`).
 - pseudo-Voigt mixing
 - automated multi-start fitting
 - stability sweeps
-- all background choices
 - Excel output
 - blind/validation split
 - sensitivity-factor sweep
 - GUI/App Designer
 
 Those belong after the legacy baseline is reproducible.
+
+Planned candidate and robustness cases are tracked in `FUTURE_TESTS.md`,
+including the separate ~681.3-681.6 eV `F_other` assignment that is not part of
+the locked three-peak F1s model.

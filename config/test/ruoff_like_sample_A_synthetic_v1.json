@@ -1,0 +1,127 @@
+{
+  "profile_name": "ruoff_like_sample_A_synthetic_test_v1",
+  "profile_version": "1.0.0",
+  "usage": "test_only_not_a_production_candidate",
+  "reference_data_file": "reference/sample_A_ruoff_v1.json",
+  "provenance_note": "C1s centers and fractions are synthetic-generation inputs derived from the Sample A Ruoff reference. They are never supplied as fitted areas or optimizer targets.",
+  "legacy_conflict_note": "The locked legacy C_CF23_C_O bounds are 288.1-289.5 eV and exclude the 287.3 eV reference. This test-only profile uses 286.8-287.7 eV and does not modify legacy_current_v1.json.",
+  "peak_shape": "gaussian",
+  "sensitivity_factors": {
+    "C1s": 1.0,
+    "F1s": 4.4118
+  },
+  "preprocessing": {
+    "normalization": "max",
+    "background": "linear",
+    "fit_smoothed_data": false,
+    "linear_n_points": 5,
+    "shirley_n_points": 5,
+    "shirley_max_iterations": 50,
+    "shirley_tolerance": 0.00001,
+    "asls_lambda": 1000000,
+    "asls_p": 0.01,
+    "asls_iterations": 20,
+    "tougaard_B": 2866,
+    "tougaard_C": 1643
+  },
+  "composition": {
+    "alpha_ambiguous": 0.0
+  },
+  "synthetic_generation": {
+    "C1s_FWHM_eV": 0.60,
+    "C1s_total_physical_area": 1.0,
+    "F1s_centers_eV": [684.7, 686.7, 688.2],
+    "F1s_physical_areas": [0.2, 0.9, 0.9],
+    "F1s_FWHM_eV": 0.65,
+    "C1s_acquisition_scale_factor": 3.0,
+    "F1s_acquisition_scale_factor": 7.0
+  },
+  "C1s": {
+    "peaks": [
+      {
+        "id": "sp2_C_C",
+        "assignment": "sp2 C-C",
+        "initial_center_eV": 284.2,
+        "center_bounds_eV": [284.0, 284.5],
+        "FWHM_bounds_eV": [0.4, 1.5],
+        "fluorine_coefficient": 0
+      },
+      {
+        "id": "C_CF_sp3",
+        "assignment": "C-CF / sp3 C-C",
+        "initial_center_eV": 285.2,
+        "center_bounds_eV": [284.9, 285.6],
+        "FWHM_bounds_eV": [0.4, 1.5],
+        "fluorine_coefficient": 0
+      },
+      {
+        "id": "C_F",
+        "assignment": "C-F",
+        "initial_center_eV": 288.1,
+        "center_bounds_eV": [287.7, 288.5],
+        "FWHM_bounds_eV": [0.4, 1.5],
+        "fluorine_coefficient": 1
+      },
+      {
+        "id": "C_CF23_C_O",
+        "assignment": "C-CF2,3 / C=O",
+        "initial_center_eV": 287.3,
+        "center_bounds_eV": [286.8, 287.7],
+        "FWHM_bounds_eV": [0.4, 1.5],
+        "fluorine_coefficient": 0,
+        "test_only_reference_bound_override": true
+      },
+      {
+        "id": "CF2",
+        "assignment": "C-F2 / CF2",
+        "initial_center_eV": 290.8,
+        "center_bounds_eV": [290.3, 291.3],
+        "FWHM_bounds_eV": [0.4, 1.5],
+        "fluorine_coefficient": 2
+      },
+      {
+        "id": "CF3",
+        "assignment": "C-F3 / CF3",
+        "initial_center_eV": 292.6,
+        "center_bounds_eV": [292.0, 293.2],
+        "FWHM_bounds_eV": [0.4, 1.5],
+        "fluorine_coefficient": 3
+      }
+    ]
+  },
+  "F1s": {
+    "classification_boundaries_eV": {
+      "ionic_to_semi_covalent": 685.7,
+      "semi_covalent_to_covalent": 687.5
+    },
+    "peaks": [
+      {
+        "id": "F_ionic",
+        "assignment": "ionic or substrate-bound F",
+        "initial_center_eV": 684.7,
+        "center_bounds_eV": [679.0, 689.0],
+        "FWHM_bounds_eV": [0.4, 1.5],
+        "include_in_carbon_bound_F": false,
+        "include_in_total_F": true
+      },
+      {
+        "id": "F_semi_covalent",
+        "assignment": "semi-covalent F-C",
+        "initial_center_eV": 686.7,
+        "center_bounds_eV": [681.0, 691.0],
+        "FWHM_bounds_eV": [0.4, 1.5],
+        "include_in_carbon_bound_F": true,
+        "include_in_total_F": true
+      },
+      {
+        "id": "F_covalent",
+        "assignment": "covalent F-C",
+        "initial_center_eV": 688.2,
+        "center_bounds_eV": [683.0, 692.0],
+        "FWHM_bounds_eV": [0.4, 1.5],
+        "include_in_carbon_bound_F": true,
+        "include_in_total_F": true
+      }
+    ]
+  }
+}

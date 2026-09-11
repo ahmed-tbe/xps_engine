@@ -1,0 +1,31 @@
+{
+  "reference_id": "ruoff_sample_A_v1",
+  "reference_version": "1.0.0",
+  "usage": "reference_only_never_optimizer_input",
+  "provenance": {
+    "source_description": "Ruoff Sample A reference values supplied by the project owner and previously embedded in the project Phase 1 comparison script.",
+    "project_record": "CxF_calculation_data/Ruoff_XPS_Model_Tuning_Report.docx",
+    "bibliographic_locator_status": "The underlying Ruoff publication figure/table locator is not present in the current workspace and must be added when available.",
+    "recorded_by_project": "2026-09-02"
+  },
+  "direct_references": {
+    "C1s_normal_emission": {
+      "fraction_unit": "percent_of_fitted_C1s_area",
+      "center_unit": "eV",
+      "peaks": [
+        {"id": "sp2_C_C", "center_eV": 284.2, "fraction_percent": 6.0},
+        {"id": "C_CF_sp3", "center_eV": 285.2, "fraction_percent": 41.0},
+        {"id": "C_CF23_C_O", "center_eV": 287.3, "fraction_percent": 3.0},
+        {"id": "C_F", "center_eV": 288.1, "fraction_percent": 47.0},
+        {"id": "CF2", "center_eV": 290.8, "fraction_percent": 2.0},
+        {"id": "CF3", "center_eV": 292.6, "fraction_percent": 1.0}
+      ]
+    },
+    "overall_sample_A": {
+      "fluorine_atomic_percent": 32.0,
+      "fluorine_reference_description": "Ruoff fluorine reference supplied by the project reference",
+      "qualitative_stoichiometry": "essentially C2F",
+      "note": "The 32 at.% value and qualitative C2F statement are direct project references. Values produced by legacy or weighted formulas from the C1s peak fractions are derived model values and are reported separately."
+    }
+  }
+}

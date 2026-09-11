@@ -80,6 +80,7 @@ R.warnings = strings(0,1);
 for i = 1:n
     pk = configuredPeak(peaksCfg, i);
     j = 3*(i-1)+1;
+    R.peaks(i).optimizer_index = i;
     R.peaks(i).id = string(pk.id);
     R.peaks(i).assignment = string(pk.assignment);
     R.peaks(i).center_eV = p(j);
