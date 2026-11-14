@@ -1,0 +1,59 @@
+{
+  "reference_id": "ruoff_sample_C_v1",
+  "reference_version": "1.0.0",
+  "sample_id": "C",
+  "usage": "reference_only_never_optimizer_input",
+  "provenance": {
+    "source_description": "Ruoff Sample C reference values recorded by the project; values are evaluation/reporting inputs and never optimizer inputs.",
+    "benchmark_table": "CxF_calculation_data/Degree of fluorination.pptx, slide 9",
+    "mentor_definition_record": "Mentor feedback approved 2026-10-05",
+    "bibliographic_locator_status": "The underlying Ruoff publication figure/table locator is not present in the current workspace and must be added when available."
+  },
+  "direct_references": {
+    "C1s_normal_emission": {
+      "fractions_complete": false,
+      "availability_note": "A complete published component-center/fraction table for Sample C is not present in the workspace; no missing values are inferred.",
+      "peaks": []
+    },
+    "main_C_F_fraction": {
+      "fraction": 0.19,
+      "peak_id": "C_F",
+      "source": "mentor-approved Ruoff Sample C C1s main C-F fraction"
+    },
+    "model_specific_fluorine_atomic_percent": {
+      "ruoff_c1s_main_cf_v1": {
+        "reference_type": "scalar",
+        "value": 16.0,
+        "unit": "atomic_percent_F",
+        "provenance": "Mentor-supplied Sample C validation reference for the main-C-F C1s reproduction model, confirmed 2026-10-13."
+      },
+      "ruoff_c1s_f1s_semi_sf3p95_v1": {
+        "reference_type": "scalar",
+        "value": 15.0,
+        "unit": "atomic_percent_F",
+        "provenance": "Mentor-supplied Sample C validation reference for the semi-covalent F1s/C1s Ruoff-reproduction model, confirmed 2026-10-13."
+      }
+    },
+    "qualitative_stoichiometry": null
+  },
+  "project_benchmark_inputs": {
+    "source": "Degree of fluorination.pptx, slide 9; integrated-area values copied without alteration",
+    "semi_covalent_F1s_area": 42980.21,
+    "total_C1s_area": 62037.528,
+    "software_normalization_scale_status": "areas are treated as source-level restored benchmark areas",
+    "acquisition_scale_status": "not documented for the raw experimental spectra",
+    "ruoff_figure_specific_correction": {
+      "status": "not documented in the available project sources",
+      "applied_in_fixture": false,
+      "production_engine_usage": "prohibited; benchmark-only metadata"
+    }
+  },
+  "model_applied_to_reference": {
+    "ruoff_c1s_main_cf_v1": {"F_over_C": 0.19, "F_atpct": 15.96638655462185},
+    "ruoff_c1s_f1s_semi_sf3p95_v1": {"F_over_C": 0.17539489682414183, "F_atpct": 14.922210169369464}
+  },
+  "raw_data_files": {
+    "C1s": "CxF_calculation_data/Ruoff group raw data/C1s_C.txt",
+    "F1s": "CxF_calculation_data/Ruoff group raw data/F1s_C.txt"
+  }
+}

@@ -1,0 +1,33 @@
+function status = getPhase0HExecutionAmendmentStatus(outputFolder)
+%GETPHASE0HEXECUTIONAMENDMENTSTATUS Inspect amendment output without writes.
+
+arguments
+    outputFolder (1,1) string = ""
+end
+projectFolder=string(fileparts(mfilename("fullpath")));
+if strlength(outputFolder)==0
+    outputFolder=fullfile(projectFolder,"results", ...
+        "phase0h_execution_amendment_v1_0_1");
+end
+plan=xpsh.buildAmendmentPlan(projectFolder);
+manifestFile=fullfile(outputFolder,"manifest.json");
+if ~isfile(manifestFile)
+    status=struct("run_status","not_started","output_folder",outputFolder, ...
+        "planned_cells",plan.cell_count,"completed_cells",0, ...
+        "planned_trials",plan.initial_trial_count,"completed_trials",0, ...
+        "error_trials",0,"remaining_trials",plan.initial_trial_count, ...
+        "fingerprint_matches_current_amendment",missing);
+    fprintf("Phase 0H amendment has not started: %s\n",outputFolder);
+    return
+end
+manifest=jsondecode(fileread(manifestFile));
+current=xpsh.createAmendmentManifest(plan,projectFolder,"amendment");
+status=xpsh.inspectRun(plan,outputFolder,manifest,string(current.run_fingerprint));
+status.fingerprint_matches_current_amendment= ...
+    status.fingerprint_matches_current_code_config;
+fprintf("Phase 0H amendment status: %s; %d/%d trials; %d/%d cells; " + ...
+    "errors=%d; fingerprint-match=%s.\n",status.run_status, ...
+    status.completed_trials,status.planned_trials,status.completed_cells, ...
+    status.planned_cells,status.error_trials, ...
+    string(status.fingerprint_matches_current_amendment));
+end

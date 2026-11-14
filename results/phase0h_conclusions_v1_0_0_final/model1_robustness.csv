@@ -1,0 +1,93 @@
+FamilyID,FamilyName,CellKey,Scenario,FinalN,Gate,GateStatus,MedianF_over_C,MedianFCError_rel,P95FCError_rel,MedianFAtAbsError_pp,P95FAtAbsError_pp,WithheldRate,ThresholdAssessment
+1,Noise,F01_N1,"PeakSNR 100",400,A,fail,0.469921580400317,0.00785155939454177,0.0245070816709832,0.170345332494637,0.533007851727074,0,meets_assigned_composition_limits
+1,Noise,F01_N2,"PeakSNR 50",400,A,fail,0.46845208752065,0.0157930262564694,0.0860558276494779,0.343482870700186,1.92471387367169,0,meets_assigned_composition_limits
+1,Noise,F01_N3,"PeakSNR 20",400,B,fail,0.46055969876859,0.0426731375241381,0.192250743668388,0.929672506021923,4.45536187657114,0,fails_assigned_composition_limits
+2,InitialConditions,F02_I1,"moderate starts, 1 replicate(s)",400,A,fail,0.468272992796916,0.019647944429208,0.113697733546906,0.427024372977133,2.56624824750987,0,fails_assigned_composition_limits
+2,InitialConditions,F02_I2,"broad starts, 1 replicate(s)",400,B,fail,0.468782787582392,0.0166705878604812,0.136058519736845,0.362560179434588,3.09389368656781,0,meets_assigned_composition_limits
+2,InitialConditions,F02_I3,"broad starts, 5 replicate(s)",400,A,fail,0.46819587316091,0.0158862188108041,0.143863153586776,0.343946444265226,3.27991860694793,0,fails_assigned_composition_limits
+2,InitialConditions,F02_I4,"broad starts, 10 replicate(s)",400,A,fail,0.469789181380454,0.018819426902825,0.147420370710845,0.407990116208614,3.36503081904889,0,fails_assigned_composition_limits
+3,PeakOrder,F03_O1,"paired canonical and independently permuted configurations",100,Order,pass,0.469999969385261,6.51377428354976e-08,6.51377428354976e-08,1.41675874587577e-06,1.41675874587577e-06,0,descriptive_or_noncomposition_gate
+3,PeakOrder,F03_O2,"paired canonical and independently permuted configurations",400,A,fail,0.46842952160257,0.0178000519364859,0.0784871704630298,0.384963696428457,1.75111154221571,0,meets_assigned_composition_limits
+4,Overlap,F04_V1,"cluster-center offset factor 0.75",100,B,fail,0.45487530585253,0.0415065074529479,0.239299882433135,0.902352624951238,5.63708465217681,0,fails_assigned_composition_limits
+4,Overlap,F04_V2,"cluster-center offset factor 0.50",400,B,fail,0.0154373972100032,0.96715447402127,0.995120121112837,30.4525184611609,31.7439596850877,0,fails_assigned_composition_limits
+4,Overlap,F04_V3,"all truth FWHM 1.0 eV",400,B,fail,0.467329690111791,0.026544949537344,0.21737624911101,0.577330920516108,5.08112074103882,0,fails_assigned_composition_limits
+4,Overlap,F04_V4,"all truth FWHM 1.4 eV",100,B,fail,0.476741785308375,0.0337351726377231,0.559113169601347,0.733688114446142,14.8334185794464,0,fails_assigned_composition_limits
+5,MissingUnnecessaryPeaks,F05_S1_zero_C1s_sp2_C_C,"zero truth area while retaining fitted component",400,C,fail,0.499411497084191,0.0179636758961942,0.0719131415316409,0.400291336395199,1.63738853842777,0,meets_assigned_composition_limits
+5,MissingUnnecessaryPeaks,F05_S1_zero_C1s_C_CF_sp3,"zero truth area while retaining fitted component",400,C,fail,0.79015805068038,0.0315210983865838,0.155078347266251,0.772512017172879,4.11000596974103,0,fails_assigned_composition_limits
+5,MissingUnnecessaryPeaks,F05_S1_zero_C1s_C_F,"zero truth area while retaining fitted component",400,C,fail,0.00439146107566495,NaN,NaN,0.437226036134962,2.54629800011697,0,fails_assigned_composition_limits
+5,MissingUnnecessaryPeaks,F05_S1_zero_C1s_C_CF23_C_O,"zero truth area while retaining fitted component",400,C,fail,0.479791037691636,0.0175672413651767,0.0499204171238908,0.386448013413244,1.11572563954126,0,meets_assigned_composition_limits
+5,MissingUnnecessaryPeaks,F05_S1_zero_C1s_CF2,"zero truth area while retaining fitted component",400,C,fail,0.476278967081354,0.0161588347978628,0.0706662208532524,0.35215122705058,1.58441342074554,0,meets_assigned_composition_limits
+5,MissingUnnecessaryPeaks,F05_S1_zero_C1s_CF3,"zero truth area while retaining fitted component",400,C,fail,0.470946105214589,0.0148592028961355,0.104064049228041,0.325627978137222,2.35036345281449,0,meets_assigned_composition_limits
+5,MissingUnnecessaryPeaks,F05_S1_zero_F1s_F_ionic,"zero truth area while retaining fitted component",400,C,fail,0.470135929382959,0.0173670690488194,0.0595923950293253,0.378614653406503,1.32132328142709,0,meets_assigned_composition_limits
+5,MissingUnnecessaryPeaks,F05_S1_zero_F1s_F_semi_covalent,"zero truth area while retaining fitted component",400,C,fail,0.468383257379134,0.0180399311210716,0.122559405421009,0.393212490428127,2.77443067743237,0,meets_assigned_composition_limits
+5,MissingUnnecessaryPeaks,F05_S1_zero_F1s_F_covalent,"zero truth area while retaining fitted component",400,C,fail,0.468560034200034,0.0155632392449767,0.0727644316503419,0.339549154510832,1.620341416527,0,meets_assigned_composition_limits
+5,MissingUnnecessaryPeaks,F05_S2_omit_C1s_sp2_C_C,"omit fitted component while retaining truth",100,C,pass,NaN,NaN,NaN,NaN,NaN,1,withheld
+5,MissingUnnecessaryPeaks,F05_S2_omit_C1s_C_CF_sp3,"omit fitted component while retaining truth",100,C,fail,0.508148530094302,0.0818616038235121,0.127116509921163,1.73509251298596,2.65682817819357,0,fails_assigned_composition_limits
+5,MissingUnnecessaryPeaks,F05_S2_omit_C1s_C_F,"omit fitted component while retaining truth",100,C,pass,NaN,NaN,NaN,NaN,NaN,1,withheld
+5,MissingUnnecessaryPeaks,F05_S2_omit_C1s_C_CF23_C_O,"omit fitted component while retaining truth",100,C,fail,NaN,NaN,NaN,NaN,NaN,1,withheld
+5,MissingUnnecessaryPeaks,F05_S2_omit_C1s_CF2,"omit fitted component while retaining truth",100,C,fail,NaN,NaN,NaN,NaN,NaN,1,withheld
+5,MissingUnnecessaryPeaks,F05_S2_omit_C1s_CF3,"omit fitted component while retaining truth",100,C,fail,NaN,NaN,NaN,NaN,NaN,1,withheld
+5,MissingUnnecessaryPeaks,F05_S2_omit_F1s_F_ionic,"omit fitted component while retaining truth",100,C,fail,0.469726744836771,0.0150965091163381,0.0602562400451011,0.328260212959865,1.31114147171946,0,meets_assigned_composition_limits
+5,MissingUnnecessaryPeaks,F05_S2_omit_F1s_F_semi_covalent,"omit fitted component while retaining truth",100,C,pass,0.4675986193804,0.0210794532604337,0.083264374051552,0.458498890234853,1.86055577575704,0,meets_assigned_composition_limits
+5,MissingUnnecessaryPeaks,F05_S2_omit_F1s_F_covalent,"omit fitted component while retaining truth",100,C,fail,0.466945287647281,0.0227446675958139,0.0768123201490255,0.494664057490084,1.71294104731106,0,meets_assigned_composition_limits
+5,MissingUnnecessaryPeaks,F05_S3_extra_fit_C1s,"add zero-truth fitted component",400,C,fail,0.468976300886463,0.0158910644477897,0.122135905364211,0.345631749627003,2.76449695125689,0,meets_assigned_composition_limits
+5,MissingUnnecessaryPeaks,F05_S3_extra_fit_F1s,"add zero-truth fitted component",400,C,fail,0.468401477706095,0.0153022635075438,0.0997848651549745,0.332112109768529,2.24223678790791,0,meets_assigned_composition_limits
+5,MissingUnnecessaryPeaks,F05_S4_unmodelled_C,"unmodelled C1s peak at 286.25 eV",400,C,pass,0.442546310995142,0.0187627830718463,0.0548630866653519,0.402721139769399,1.19092004717526,0,meets_assigned_composition_limits
+5,MissingUnnecessaryPeaks,F05_S5_F_other_01,"unmodelled F_other at 681.5 eV, 1% total F",400,C,fail,0.467382048638466,0.0183553979168552,0.0990913931120152,0.399257305735144,2.22579039090106,0,meets_assigned_composition_limits
+5,MissingUnnecessaryPeaks,F05_S5_F_other_05,"unmodelled F_other at 681.5 eV, 5% total F",400,C,pass,0.469334319666662,0.0167826348497847,0.065111562534939,0.363077366279999,1.44635484058775,0,meets_assigned_composition_limits
+5,MissingUnnecessaryPeaks,F05_S5_F_other_10,"unmodelled F_other at 681.5 eV, 10% total F",100,C,fail,0.47190120340448,0.0178192653392679,0.0576376830626518,0.387463906708723,1.25632565196756,0,meets_assigned_composition_limits
+6,PeakShape,F06_P1,"pseudo-Voigt truth eta 0.2; Gaussian fit",400,A,fail,0.448930659568397,0.0448283838970283,0.215957239213119,0.989204355837961,5.04549285634628,0,fails_assigned_composition_limits
+6,PeakShape,F06_P2,"pseudo-Voigt truth eta 0.5; Gaussian fit",400,B,fail,0.350463734833777,0.25433247907707,0.309498851812919,6.02142698990483,7.47095268487867,0,fails_assigned_composition_limits
+6,PeakShape,F06_P3,"pseudo-Voigt truth eta 0.8; Gaussian fit",100,B,fail,0.368528779020157,0.215896214850729,0.392983935197944,5.04397440851558,9.77582826200122,0,fails_assigned_composition_limits
+7,Background,F07_B1,"linear truth -> linear preprocessing",400,A,fail,0.467785592305526,0.01913951912019,0.107328836919879,0.416898453234921,2.41739958656617,0,fails_assigned_composition_limits
+7,Background,F07_B2,"shirley truth -> shirley preprocessing",100,A,fail,0.344932195010628,0.266101712743345,0.28740288964508,6.32597994924885,6.88361126017801,0,fails_assigned_composition_limits
+7,Background,F07_B3,"tougaard truth -> tougaard preprocessing",400,A,fail,0.560597057354972,0.192759696499941,0.201831125245191,3.94917130721969,4.12375631201748,0,fails_assigned_composition_limits
+7,Background,F07_B4,"shirley truth -> linear preprocessing",100,C,pass,0.425227822633482,0.0952599518436559,0.124845436065875,2.137010327138,2.82833155909306,0,fails_assigned_composition_limits
+7,Background,F07_B5,"tougaard truth -> linear preprocessing",400,C,pass,0.498285126344542,0.060181119882004,0.0903261998212688,1.28424037640759,1.90946313579301,0,fails_assigned_composition_limits
+7,Background,F07_B6,"quadratic truth -> linear preprocessing",400,C,fail,0.491385236072009,0.0455005022808694,0.0704047019297507,0.975454152940642,1.49760286642552,0,meets_assigned_composition_limits
+7,Background,F07_B7,"zero truth -> asls preprocessing",400,C,pass,0.431756880028043,0.0813683403658664,0.101128176107264,1.81704927047508,2.27305391527205,0,fails_assigned_composition_limits
+8,WindowTruncation,F08_T_low_0.5,"trim 0.5 eV from low edge(s)",100,B,fail,0.470829655043481,0.0139152245468259,0.0631808909949526,0.302048658952398,1.37374126754506,0,meets_assigned_composition_limits
+8,WindowTruncation,F08_T_low_1.0,"trim 1.0 eV from low edge(s)",400,B,fail,0.468471948233354,0.0168150680982617,0.0976274460021329,0.367007114086753,2.19233752113746,0,meets_assigned_composition_limits
+8,WindowTruncation,F08_T_low_2.0,"trim 2.0 eV from low edge(s)",400,B,fail,0.469731150921324,0.0165116911924623,0.0655319650569275,0.358263304861483,1.45583871390648,0,meets_assigned_composition_limits
+8,WindowTruncation,F08_T_high_0.5,"trim 0.5 eV from high edge(s)",100,B,fail,0.469513557519266,0.0143244473129503,0.0658956129441811,0.311655487362041,1.46434347591019,0,meets_assigned_composition_limits
+8,WindowTruncation,F08_T_high_1.0,"trim 1.0 eV from high edge(s)",400,B,fail,0.467429779694157,0.0171803534823932,0.0800169469337197,0.373684236339905,1.78608758985631,0,meets_assigned_composition_limits
+8,WindowTruncation,F08_T_high_2.0,"trim 2.0 eV from high edge(s)",100,B,fail,0.469104824607295,0.0208181295622091,0.0792739964870645,0.455834130103781,1.77353569746179,0,meets_assigned_composition_limits
+8,WindowTruncation,F08_T_both_0.5,"trim 0.5 eV from both edge(s)",400,B,fail,0.467083471054552,0.0161667821926406,0.0716412430236419,0.350022255930329,1.5947548708028,0,meets_assigned_composition_limits
+8,WindowTruncation,F08_T_both_1.0,"trim 1.0 eV from both edge(s)",100,B,fail,0.467347973961104,0.0203308133750392,0.0661006435720551,0.442283588788937,1.46875114907085,0,meets_assigned_composition_limits
+8,WindowTruncation,F08_T_both_2.0,"trim 2.0 eV from both edge(s)",100,B,fail,0.47130315185022,0.0156202180534672,0.05481795849163,0.340157965474482,1.21369833157878,0,meets_assigned_composition_limits
+9,ScaleControls,F09_Q1,"random_exact",100,Scale,fail,0.469999969385167,6.51379429118597e-08,6.51381157050815e-08,1.41676309795002e-06,1.41676685849745e-06,0,descriptive_or_noncomposition_gate
+9,ScaleControls,F09_Q2,"random_exact_file_units",100,Scale,fail,0.469999969385166,6.51379450378187e-08,6.51381367875081e-08,1.41676314946437e-06,1.41676731679752e-06,0,descriptive_or_noncomposition_gate
+9,ScaleControls,F09_Q3,"unknown_cycle",100,C,pass,0.469999969385261,6.51377428354976e-08,6.51377428354976e-08,1.41675874587577e-06,1.41675874587577e-06,0,meets_assigned_composition_limits
+10,ChargingShift,F10_G1,"common U(-0.25,0.25) eV shift",400,A,fail,0.468381320842025,0.0173751668580776,0.113826250531929,0.37747815565714,2.56925379467188,0,fails_assigned_composition_limits
+10,ChargingShift,F10_G2,"common U(-0.50,0.50) eV shift",400,B,fail,0.469080372669293,0.019940043702568,0.349752275467951,0.431774481714854,8.56602651250152,0,fails_assigned_composition_limits
+11,AcquisitionScaleError,F11_E1,"F1s supplied scale x 0.90",100,C,pass,0.469999969385158,6.51379621635994e-08,6.51381325946445e-08,1.41676351717024e-06,1.41676722442696e-06,0,meets_assigned_composition_limits
+11,AcquisitionScaleError,F11_E2,"F1s supplied scale x 1.10",100,C,pass,0.469999969385167,6.51379434433494e-08,6.51381278702912e-08,1.41676311038452e-06,1.41676712139827e-06,0,meets_assigned_composition_limits
+11,AcquisitionScaleError,F11_E3,"C1s supplied scale x 0.90",100,C,pass,0.469999969385166,6.51379449787642e-08,6.51381468267588e-08,1.41676314591166e-06,1.41676753351305e-06,0,meets_assigned_composition_limits
+11,AcquisitionScaleError,F11_E4,"C1s supplied scale x 1.10",100,C,pass,0.469999969385165,6.51379459826893e-08,6.51381337757329e-08,1.41676316722794e-06,1.41676725107232e-06,0,meets_assigned_composition_limits
+11,AcquisitionScaleError,F11_E5,"both supplied scale x 0.90",100,C,pass,0.469999969385164,6.51379479905395e-08,6.51381345434403e-08,1.41676320986051e-06,1.41676727061224e-06,0,meets_assigned_composition_limits
+11,AcquisitionScaleError,F11_E6,"both supplied scale x 1.10",100,C,pass,0.469999969385166,6.51379445653833e-08,6.5138141748079e-08,1.41676313702987e-06,1.41676742515529e-06,0,meets_assigned_composition_limits
+12,SensitivitySweep,F12_R1,"ruoff_reproduction_sf3p95_v1 S_F multiplier 0.90",100,C_descriptive,descriptive_no_acceptance_gate,0.47,0,0,3.5527136788005e-15,3.5527136788005e-15,0,descriptive_or_noncomposition_gate
+12,SensitivitySweep,F12_R2,"ruoff_reproduction_sf3p95_v1 S_F multiplier 0.95",100,C_descriptive,descriptive_no_acceptance_gate,0.47,0,0,3.5527136788005e-15,3.5527136788005e-15,0,descriptive_or_noncomposition_gate
+12,SensitivitySweep,F12_R3,"ruoff_reproduction_sf3p95_v1 S_F multiplier 1.00",100,Scale,pass,0.47,0,0,3.5527136788005e-15,3.5527136788005e-15,0,descriptive_or_noncomposition_gate
+12,SensitivitySweep,F12_R4,"ruoff_reproduction_sf3p95_v1 S_F multiplier 1.05",100,C_descriptive,descriptive_no_acceptance_gate,0.47,0,0,3.5527136788005e-15,3.5527136788005e-15,0,descriptive_or_noncomposition_gate
+12,SensitivitySweep,F12_R5,"ruoff_reproduction_sf3p95_v1 S_F multiplier 1.10",100,C_descriptive,descriptive_no_acceptance_gate,0.47,0,0,3.5527136788005e-15,3.5527136788005e-15,0,descriptive_or_noncomposition_gate
+12,SensitivitySweep,F12_T1,"thermo_k_alpha_sf4p118_v1 S_F multiplier 0.90",100,C_descriptive,descriptive_no_acceptance_gate,0.47,0,0,3.5527136788005e-15,3.5527136788005e-15,0,descriptive_or_noncomposition_gate
+12,SensitivitySweep,F12_T2,"thermo_k_alpha_sf4p118_v1 S_F multiplier 0.95",100,C_descriptive,descriptive_no_acceptance_gate,0.47,0,0,3.5527136788005e-15,3.5527136788005e-15,0,descriptive_or_noncomposition_gate
+12,SensitivitySweep,F12_T3,"thermo_k_alpha_sf4p118_v1 S_F multiplier 1.00",100,Scale,pass,0.47,0,0,3.5527136788005e-15,3.5527136788005e-15,0,descriptive_or_noncomposition_gate
+12,SensitivitySweep,F12_T4,"thermo_k_alpha_sf4p118_v1 S_F multiplier 1.05",100,C_descriptive,descriptive_no_acceptance_gate,0.47,0,0,3.5527136788005e-15,3.5527136788005e-15,0,descriptive_or_noncomposition_gate
+12,SensitivitySweep,F12_T5,"thermo_k_alpha_sf4p118_v1 S_F multiplier 1.10",100,C_descriptive,descriptive_no_acceptance_gate,0.47,0,0,3.5527136788005e-15,3.5527136788005e-15,0,descriptive_or_noncomposition_gate
+13,LabelMisclassification,F13_L1,"swap_semi_ionic",100,C,pass,0.469999969385172,6.51379313371941e-08,6.51381160003536e-08,1.41676284926007e-06,1.41676686382652e-06,0,meets_assigned_composition_limits
+13,LabelMisclassification,F13_L2,"swap_semi_covalent",100,C,pass,0.469999969385163,6.51379499983896e-08,6.51381483621737e-08,1.41676325426943e-06,1.41676756548748e-06,0,meets_assigned_composition_limits
+13,LabelMisclassification,F13_L3,"remove_semi",100,C,pass,0.469999969385172,6.51379309828676e-08,6.51381618265806e-08,1.41676283860193e-06,1.41676786036271e-06,0,meets_assigned_composition_limits
+13,LabelMisclassification,F13_L4,"duplicate_semi",100,C,pass,0.469999969385164,6.51379497031175e-08,6.51381385591406e-08,1.41676324538764e-06,1.41676735587737e-06,0,meets_assigned_composition_limits
+14,SubstrateShoulder,F14_X1,"substrate 684.0 eV at 2% total F",400,C,fail,0.468351514601295,0.0193898638788704,0.106049399487767,0.420532844694016,2.38756209709782,0,meets_assigned_composition_limits
+14,SubstrateShoulder,F14_X2,"substrate 684.0 eV at 10% total F",400,C,pass,0.468449117293014,0.0167268325294748,0.0928865850452033,0.36351030970763,2.08273319474523,0,meets_assigned_composition_limits
+14,SubstrateShoulder,F14_X3,"shoulder 685.8 eV at 2% total F",100,C,fail,0.465406748198317,0.0224138911207994,0.0645085356801397,0.484035928868792,1.43287614001839,0,meets_assigned_composition_limits
+14,SubstrateShoulder,F14_X4,"shoulder 685.8 eV at 5% total F",100,C,pass,0.468059059514423,0.0167415681814495,0.106508779198967,0.366092015132818,2.39961823423286,0,meets_assigned_composition_limits
+15,BoundSensitivity,F15_W1,"center",400,A_paired,fail,0.467900979440672,0.0159708949373441,0.0684070011761817,0.347358445322588,1.52115815841986,0,meets_assigned_composition_limits
+15,BoundSensitivity,F15_W2,"fwhm",400,A_paired,fail,0.468580536415645,0.0161231466626657,0.0652197956451258,0.348883107511153,1.4487634697675,0,meets_assigned_composition_limits
+15,BoundSensitivity,F15_W3,"center_and_fwhm_overlap_v2",100,B_paired,fail,0.0185979440349585,0.960429906308599,0.994606731213017,30.1469516084502,31.7199466424364,0,fails_assigned_composition_limits
+16,CombinedStress,F16_C1,"frozen combined-stress scenario C1",100,B,fail,0.374198215267587,0.203833584537048,0.275832702257707,4.74249519315267,6.57968850201269,0,fails_assigned_composition_limits
+16,CombinedStress,F16_C2,"frozen combined-stress scenario C2",100,B,fail,0.331670020724398,0.294319104841706,0.745128663428678,7.06646737158767,21.3493655392458,0,fails_assigned_composition_limits
+16,CombinedStress,F16_C3,"frozen combined-stress scenario C3",400,C,fail,0.463747491935874,0.0247060546594206,0.0722620666656926,0.533149982608119,1.55927099624922,0,meets_assigned_composition_limits
+16,CombinedStress,F16_C4,"frozen combined-stress scenario C4",100,C,pass,NaN,NaN,NaN,NaN,NaN,1,withheld

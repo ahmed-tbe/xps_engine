@@ -1,0 +1,43 @@
+{
+  "first": {
+    "status": "paused_at_max_new_trials",
+    "new_trials_executed": 1,
+    "previous_trials_skipped": 0,
+    "recorded_trial_errors": 0,
+    "completed_cells_seen": 0,
+    "elapsed_seconds": 0.2609405,
+    "checkpoint_root": "C:\\Users\\ahmed\\Desktop\\GPT_Ruoff_XPS_CxF_legacy_baseline\\results\\phase0h_borderline_extension_v1_0_0_dry_run_verified\\checkpoint_resume_mock\\checkpoints",
+    "log_file": "C:\\Users\\ahmed\\Desktop\\GPT_Ruoff_XPS_CxF_legacy_baseline\\results\\phase0h_borderline_extension_v1_0_0_dry_run_verified\\checkpoint_resume_mock\\run.log",
+    "plotting_enabled": false,
+    "run_fingerprint": "1f932b278de41dc14154191833f45b5fcf55f3b5a01edd7a661ddcbcf2f556bf:1fed3f84def76086c78bc1db0a31f7f2ce90e55a73547bd41818d3cedf59b8f3:dry-run-dummy"
+  },
+  "second": {
+    "status": "extension_execution_pass_complete",
+    "new_trials_executed": 1,
+    "previous_trials_skipped": 1,
+    "recorded_trial_errors": 0,
+    "completed_cells_seen": 0,
+    "elapsed_seconds": 0.2035204,
+    "checkpoint_root": "C:\\Users\\ahmed\\Desktop\\GPT_Ruoff_XPS_CxF_legacy_baseline\\results\\phase0h_borderline_extension_v1_0_0_dry_run_verified\\checkpoint_resume_mock\\checkpoints",
+    "log_file": "C:\\Users\\ahmed\\Desktop\\GPT_Ruoff_XPS_CxF_legacy_baseline\\results\\phase0h_borderline_extension_v1_0_0_dry_run_verified\\checkpoint_resume_mock\\run.log",
+    "plotting_enabled": false,
+    "run_fingerprint": "1f932b278de41dc14154191833f45b5fcf55f3b5a01edd7a661ddcbcf2f556bf:1fed3f84def76086c78bc1db0a31f7f2ce90e55a73547bd41818d3cedf59b8f3:dry-run-dummy"
+  },
+  "third": {
+    "status": "extension_execution_pass_complete",
+    "new_trials_executed": 0,
+    "previous_trials_skipped": 2,
+    "recorded_trial_errors": 0,
+    "completed_cells_seen": 0,
+    "elapsed_seconds": 0.0587323,
+    "checkpoint_root": "C:\\Users\\ahmed\\Desktop\\GPT_Ruoff_XPS_CxF_legacy_baseline\\results\\phase0h_borderline_extension_v1_0_0_dry_run_verified\\checkpoint_resume_mock\\checkpoints",
+    "log_file": "C:\\Users\\ahmed\\Desktop\\GPT_Ruoff_XPS_CxF_legacy_baseline\\results\\phase0h_borderline_extension_v1_0_0_dry_run_verified\\checkpoint_resume_mock\\run.log",
+    "plotting_enabled": false,
+    "run_fingerprint": "1f932b278de41dc14154191833f45b5fcf55f3b5a01edd7a661ddcbcf2f556bf:1fed3f84def76086c78bc1db0a31f7f2ce90e55a73547bd41818d3cedf59b8f3:dry-run-dummy"
+  },
+  "completed_trial_ids": [
+    101,
+    102
+  ],
+  "verified": true
+}

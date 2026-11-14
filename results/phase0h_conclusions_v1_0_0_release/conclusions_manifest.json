@@ -1,0 +1,30 @@
+{
+  "package_id": "phase0h_scientific_conclusions",
+  "package_version": "1.0.0",
+  "generated_at": "2026-10-16T13:46:23-05:00",
+  "read_only_postprocessing": true,
+  "monte_carlo_trials_executed": 0,
+  "source_summary": "results\\phase0h_final_v1_0_0\\phase0h_final_summary.mat",
+  "source_summary_sha256": "2d90e57a7fffd284597f521637c5e18c2bfee22d6e212206692c62a3bb7bf301",
+  "source_provenance_sha256": "5b41766f2a30f4f44b17fb5cf9c70f9c71ff42c8bdcdc032cc0bae87fd62e9d7",
+  "plan_sha256": "1f932b278de41dc14154191833f45b5fcf55f3b5a01edd7a661ddcbcf2f556bf",
+  "cell_count": 92,
+  "trial_count": 21800,
+  "extended_cells": 42,
+  "unextended_cells": 50,
+  "source_integrity_unchanged": true,
+  "postprocessing_files": [
+    "generatePhase0HScientificTables.m",
+    "analyzePhase0HUnifiedTrial.m",
+    "summarizePhase0HUnifiedResults.m"
+  ],
+  "postprocessing_sha256": [
+    "2e7fa2c102befff66dceb4e06cb7b51ea4bfe8d50e5e1faf6561b1e4330a0883",
+    "cd569ca51ca54bb21bf7461ebcc883681a7efa9bcad7037a921054c37e577831",
+    "25c29b0c37692fa54cbdccd1c34fb26b88309a3feded3b82d0213e92399d64db"
+  ],
+  "postprocessing_combined_sha256": "a5e1acf7e8a39a5e0e423496ff9c723349b30f211b2a73a52be73340163a5006",
+  "sample_C_used": false,
+  "production_configuration_changed": false,
+  "thresholds_changed": false
+}

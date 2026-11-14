@@ -1,0 +1,42 @@
+{
+  "summary_id": "phase0h_unified_read_only_summary",
+  "summary_version": "1.0.1",
+  "plan_sha256": "1f932b278de41dc14154191833f45b5fcf55f3b5a01edd7a661ddcbcf2f556bf",
+  "original_execution_fingerprint": "93c6ad3a88ba0245be2043c06ca20c0adb62033989f051a6e71e340d31e292b4",
+  "amended_execution_fingerprint": "60ddb98176b263595a54ae115980c96dcb7e696dc64e2cd05b759aef2e2a55e6",
+  "amended_code_config_fingerprint": "e0173d6d25ebd30e2c1ac02054e4a29568d0a9038b0c4ea815fddcd272293845",
+  "affected_cells": [
+    "F10_G2",
+    "F12_R1",
+    "F12_R2",
+    "F12_R3",
+    "F12_R4",
+    "F12_R5",
+    "F12_T1",
+    "F12_T2",
+    "F12_T3",
+    "F12_T4",
+    "F12_T5"
+  ],
+  "source_cell_counts": {
+    "original": 81,
+    "amendment": 11
+  },
+  "all_cells_have_100_trials": true,
+  "all_trials_usable": true,
+  "provenance_validation_passed": true,
+  "postprocessing": {
+    "version": "1.0.1",
+    "files": [
+      "generateUnifiedPhase0HSummary.m",
+      "analyzePhase0HUnifiedTrial.m",
+      "summarizePhase0HUnifiedResults.m"
+    ],
+    "file_sha256": [
+      "dcaffe8d24cb60f863ba4bc517662db152be099e49ac945d84be88d4c590eb24",
+      "cd569ca51ca54bb21bf7461ebcc883681a7efa9bcad7037a921054c37e577831",
+      "25c29b0c37692fa54cbdccd1c34fb26b88309a3feded3b82d0213e92399d64db"
+    ],
+    "combined_sha256": "d3e025e7a94db451377e950b23b6cf4c73ce1163831eabb299618f4f997cc25a"
+  }
+}

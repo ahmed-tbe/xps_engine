@@ -1,0 +1,32 @@
+{
+  "summary_id": "phase0h_final_mixed_N_read_only_summary",
+  "summary_version": "1.0.0",
+  "plan_sha256": "1f932b278de41dc14154191833f45b5fcf55f3b5a01edd7a661ddcbcf2f556bf",
+  "extension_execution_fingerprint": "1fdf37df906a6c5543364829b969546e1ba3cce11fdd6314bf1fe853cc67902f",
+  "initial_unified_summary_sha256": "34a7918ac0134f2e3267a5935345a6d067baa1133708fec412edba6876a13a32",
+  "extended_cells_N": 400,
+  "extended_cell_count": 42,
+  "unextended_cells_N": 100,
+  "unextended_cell_count": 50,
+  "trial_count": 21800,
+  "execution_errors": 0,
+  "provenance_validation_passed": true,
+  "observed_rates_are_primary_gates": true,
+  "wilson_intervals_are_uncertainty_only": true,
+  "postprocessing": {
+    "version": "1.0.0",
+    "files": [
+      "generateFinalPhase0HSummary.m",
+      "buildPhase0HFailureBreakdown.m",
+      "analyzePhase0HUnifiedTrial.m",
+      "summarizePhase0HUnifiedResults.m"
+    ],
+    "file_sha256": [
+      "bd6e20510ec9956ee6dd3a8883fc26c1884bf7fb5f38fed37f5f3d7ba42b6408",
+      "c06c9a95810fd713c16d6a4de79470c37b9bc580db2affcb085898cc04f1a6ad",
+      "cd569ca51ca54bb21bf7461ebcc883681a7efa9bcad7037a921054c37e577831",
+      "25c29b0c37692fa54cbdccd1c34fb26b88309a3feded3b82d0213e92399d64db"
+    ],
+    "combined_sha256": "17c7521657d2fde32481c56cec631b14c982bce36d403f1889399f04e5b41f1f"
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "manifest_id": "phase0h_borderline_extension_manifest",
+  "manifest_version": "1.0.0",
+  "run_mode": "extension",
+  "status": "approved_extension_execution",
+  "generated_at": "2026-10-14T17:17:51-05:00",
+  "plan_id": "phase_0h_robustness_plan",
+  "plan_version": "1.0.0",
+  "plan_sha256": "1f932b278de41dc14154191833f45b5fcf55f3b5a01edd7a661ddcbcf2f556bf",
+  "extension_id": "phase0h_borderline_extension",
+  "extension_version": "1.0.0",
+  "cell_count": 42,
+  "extension_first_trial": 101,
+  "extension_last_trial": 400,
+  "extension_trials_per_cell": 300,
+  "extension_trial_count": 12600,
+  "expected_optimizer_invocations": 40200,
+  "seed_namespace": "phase0h_borderline_extension_v1_0_0/trials_101_400",
+  "seed_namespace_definition": "The namespace is the disjoint trial-ID domain 101-400 under the frozen seed formula. Trials 1-100 remain in the initial namespace; numeric seed uniqueness and zero intersection are audited explicitly.",
+  "seed_formula": "100000000*familyID + 100000*cellIndex + 100*trialID + streamID",
+  "selected_cells": [
+    "F01_N1",
+    "F01_N2",
+    "F01_N3",
+    "F02_I1",
+    "F02_I2",
+    "F02_I3",
+    "F02_I4",
+    "F03_O2",
+    "F04_V2",
+    "F04_V3",
+    "F05_S1_zero_C1s_sp2_C_C",
+    "F05_S1_zero_C1s_C_CF_sp3",
+    "F05_S1_zero_C1s_C_F",
+    "F05_S1_zero_C1s_C_CF23_C_O",
+    "F05_S1_zero_C1s_CF2",
+    "F05_S1_zero_C1s_CF3",
+    "F05_S1_zero_F1s_F_ionic",
+    "F05_S1_zero_F1s_F_semi_covalent",
+    "F05_S1_zero_F1s_F_covalent",
+    "F05_S3_extra_fit_C1s",
+    "F05_S3_extra_fit_F1s",
+    "F05_S4_unmodelled_C",
+    "F05_S5_F_other_01",
+    "F05_S5_F_other_05",
+    "F06_P1",
+    "F06_P2",
+    "F07_B1",
+    "F07_B3",
+    "F07_B5",
+    "F07_B6",
+    "F07_B7",
+    "F08_T_low_1.0",
+    "F08_T_low_2.0",
+    "F08_T_high_1.0",
+    "F08_T_both_0.5",
+    "F10_G1",
+    "F10_G2",
+    "F14_X1",
+    "F14_X2",
+    "F15_W1",
+    "F15_W2",
+    "F16_C3"
+  ],
+  "selection_source": "results/phase0h_unified_v1_0_1/borderline_extension_cells.csv",
+  "selection_source_sha256": "ca98e2a2e3c355dcb6d1fb67e18723f1ac115e9dd211623a0a2fa94248eccfc5",
+  "selected_cell_sha256": "0f1c1c6295f47f8945e3a56f2cfc309d7851cdde23a28eff99903c72a9471d84",
+  "execution_files": [
+    {
+      "path": "buildPhase0HExtensionPlan.m",
+      "sha256": "ba3094b5d2c0b78f42a510d97fb2781cab845f029f1f94e0bbe3b0a8667edc40"
+    },
+    {
+      "path": "phase0HExtensionSeedSchedule.m",
+      "sha256": "9549b1bcf8e6f96912d73ee5ab63f2afbdb49ee223c3efad1e0658aaa7d4227e"
+    },
+    {
+      "path": "createPhase0HExtensionManifest.m",
+      "sha256": "a777136a924e275e782fabe0f040220b716af3a4a7bf55a37ecabb9b7ab63a6f"
+    },
+    {
+      "path": "preparePhase0HExtensionRun.m",
+      "sha256": "f26bef01fa1a7c453ecdffe836f87f14bfbbee9784b664dc09692214ed92051a"
+    },
+    {
+      "path": "executePhase0HExtensionPlan.m",
+      "sha256": "c25ebcdc082e279a5ab2ad0f7d630e0176832d8fa3c2aef4db583607b1c87d80"
+    },
+    {
+      "path": "writePhase0HExtensionCellCheckpoint.m",
+      "sha256": "9764d0fbc29f345dbef7e8f8b8cbcc9c8be691f26439c3e88db5ab30d8d6b7a4"
+    },
+    {
+      "path": "inspectPhase0HExtensionRun.m",
+      "sha256": "84fda4b190b0d6f2ff175b0f745f2088ee8864b019b1d5c327590628a96c7a1f"
+    },
+    {
+      "path": "phase0HResultIntegritySnapshot.m",
+      "sha256": "3fff1f8dc4cef2ec7d8f9332932c731fa134d902e4ac753fba1c76872385e7f1"
+    },
+    {
+      "path": "getPhase0HExtensionStatus.m",
+      "sha256": "23eb4b2ddcbe73a29c7f190d6284762679071ab5e18cd3e8f7bbedf3da5a345d"
+    },
+    {
+      "path": "runPhase0HExtension.m",
+      "sha256": "5c30f65bbeef1ca5e4078c449e61f3afaedd2556931aa78fe648c68a836de01e"
+    }
+  ],
+  "parent_core_code_config_fingerprint": "e0173d6d25ebd30e2c1ac02054e4a29568d0a9038b0c4ea815fddcd272293845",
+  "extension_code_sha256": "b90513e92eb790999bf499246e75c44a951a4cebb235afa2603f560be67400b5",
+  "extension_execution_fingerprint": "1fdf37df906a6c5543364829b969546e1ba3cce11fdd6314bf1fe853cc67902f",
+  "run_fingerprint": "1f932b278de41dc14154191833f45b5fcf55f3b5a01edd7a661ddcbcf2f556bf:1fdf37df906a6c5543364829b969546e1ba3cce11fdd6314bf1fe853cc67902f",
+  "execution": {
+    "plotting_enabled": false,
+    "default_figure_visibility": "off",
+    "checkpoint_frequency": "after every trial and completed cell",
+    "trial_range": "101-400 only"
+  },
+  "parent_results": {
+    "original_execution_fingerprint": "93c6ad3a88ba0245be2043c06ca20c0adb62033989f051a6e71e340d31e292b4",
+    "amended_execution_fingerprint": "60ddb98176b263595a54ae115980c96dcb7e696dc64e2cd05b759aef2e2a55e6",
+    "accepted_unified_provenance_sha256": "130817f2d8c30ad2944d814d9cce2250aada98acbb9cf49532580cfaf7da484f",
+    "accepted_unified_summary_sha256": "34a7918ac0134f2e3267a5935345a6d067baa1133708fec412edba6876a13a32",
+    "immutable": true
+  },
+  "final_analysis_policy": {
+    "extended_cells_N": 400,
+    "unextended_cells_N": 100,
+    "observed_rates_are_gates": true,
+    "wilson_intervals_are_uncertainty_only": true,
+    "thresholds_unchanged": true
+  }
+}

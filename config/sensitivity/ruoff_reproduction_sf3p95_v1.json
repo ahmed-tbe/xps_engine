@@ -1,0 +1,11 @@
+{
+  "profile_id": "ruoff_reproduction_sf3p95_v1",
+  "profile_version": "1.0.0",
+  "S_C": 1.0,
+  "S_F": 3.95,
+  "ratio_definition": "S_F/S_C",
+  "ratio_value": 3.95,
+  "status": "provisional",
+  "source_provenance": "Mentor-approved provisional Ruoff-reproduction factor selected because it best reproduces the published Ruoff benchmark values; it is not confirmed as Ruoff's actual instrument sensitivity factor.",
+  "intended_application": "Ruoff A-C benchmark reproduction and model validation only; not future Thermo K-Alpha experimental quantification."
+}

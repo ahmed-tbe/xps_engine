@@ -1,0 +1,13 @@
+FailureCategory,FailingCellCount,AffectedTrialCount,ApplicableTrialDenominator
+center accuracy,28,7132,20500
+FWHM accuracy,34,10289,20500
+major peak area,26,5412,20500
+minor peak fraction,26,4652,20500
+F/C,34,3593,20500
+F-at.%,33,2513,20500
+false-valid,23,1941,20500
+false-invalid,21,1162,20500
+misclassification,0,400,400
+withholding,77,12294,21800
+bound sensitivity,3,900,900
+convergence,0,1,21800

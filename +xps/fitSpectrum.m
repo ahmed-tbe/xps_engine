@@ -1,4 +1,4 @@
-function R = fitSpectrum(x, y, regionCfg, peakShape)
+function R = fitSpectrum(x, y, regionCfg, peakShape, executionOptions)
 %FITSPECTRUM Fit configured, bounded XPS peak components to a spectrum.
 %
 % R = xps.fitSpectrum(x, y, regionCfg, peakShape) consumes one region
@@ -10,6 +10,7 @@ arguments
     y (:,1) double
     regionCfg (1,1) struct
     peakShape (1,1) string = "gaussian"
+    executionOptions (1,1) struct = struct()
 end
 
 if ~isfield(regionCfg, "peaks") || isempty(regionCfg.peaks)
@@ -49,6 +50,29 @@ for i = 1:n
     ub(j+2) = areaUpperBound;
 end
 
+% Phase 0H may supply a deterministic multi-start initialization. This
+% changes only p0; the peak equations, bounds, residual, and optimizer are
+% identical to the normal production path.
+if isfield(executionOptions,"initialParams") && ...
+        ~isempty(executionOptions.initialParams)
+    supplied = double(executionOptions.initialParams);
+    if isequal(size(supplied),[n,3])
+        supplied = reshape(supplied.',[],1);
+    else
+        supplied = supplied(:);
+    end
+    if numel(supplied) ~= 3*n || any(~isfinite(supplied))
+        error("xps:fitSpectrum:InvalidInitialParameters", ...
+            "initialParams must contain three finite values per peak.");
+    end
+    tolerance = 100*eps(max(1,max(abs([lb;ub]))));
+    if any(supplied < lb-tolerance | supplied > ub+tolerance)
+        error("xps:fitSpectrum:InitialParametersOutsideBounds", ...
+            "A supplied Phase 0H initial parameter is outside its fit bounds.");
+    end
+    p0 = min(max(supplied,lb),ub);
+end
+
 model = @(p) buildModel(x, p, peakShape);
 resid = @(p) model(p) - y;
 opts = optimoptions("lsqnonlin", ...
@@ -72,6 +96,7 @@ R.output = output;
 R.resnorm = resnorm;
 R.fitParameterCount = 3*n;
 R.areaUpperBoundHeuristic = areaUpperBound;
+R.initialization_source = conditionalInitializationSource(executionOptions);
 R.areaFractionDefinition = ...
     "fraction of fitted peak area within this spectral region";
 R.peaks = repmat(struct(),n,1);
@@ -140,6 +165,14 @@ for i = 1:n
 end
 
 R.metrics = xps.calculateFitMetrics(y,fitY,3*n);
+end
+
+function value = conditionalInitializationSource(options)
+if isfield(options,"initialParams") && ~isempty(options.initialParams)
+    value = "caller_supplied_deterministic_start";
+else
+    value = "production_default";
+end
 end
 
 function pk = configuredPeak(peaksCfg, index)

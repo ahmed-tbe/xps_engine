@@ -1,0 +1,31 @@
+{
+  "profile_id": "ruoff_primary_composition_models_v1",
+  "profile_version": "1.0.0",
+  "status": "mentor_approved_definition",
+  "models": {
+    "c1s_main_cf": {
+      "model_id": "ruoff_c1s_main_cf_v1",
+      "model_version": "1.0.0",
+      "equation_id": "main_c_f_area_over_total_c1s_area",
+      "equation_text": "F/C = A(C-F) / A(C,total)",
+      "numerator_peak_id": "C_F",
+      "numerator_chemical_label": "C-F",
+      "denominator_definition": "sum of all fitted C1s component areas defined by the active C1s model configuration"
+    },
+    "c1s_f1s_semi": {
+      "model_id": "ruoff_c1s_f1s_semi_sf3p95_v1",
+      "model_version": "1.0.0",
+      "equation_id": "semi_covalent_f1s_sensitivity_corrected_over_total_c1s",
+      "equation_text": "F/C = (A(F,semi)/S_F) / (A(C,total)/S_C)",
+      "numerator_chemical_assignment": "semi_covalent_F_C",
+      "numerator_chemical_label": "semi-covalent F-C",
+      "allowed_center_range_eV": [686.7, 686.9],
+      "denominator_definition": "sum of all fitted C1s component areas after software-normalization and acquisition-scale restoration",
+      "excluded_primary_numerator_assignments": [
+        "ionic_or_substrate_bound_F",
+        "other_or_interface_F",
+        "covalent_F_C"
+      ]
+    }
+  }
+}

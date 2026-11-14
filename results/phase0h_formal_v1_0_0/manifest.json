@@ -1,0 +1,275 @@
+{
+  "manifest_id": "phase0h_formal_run_manifest",
+  "manifest_version": "1.0.0",
+  "run_mode": "formal",
+  "status": "formal_execution",
+  "generated_at": "2026-10-13T14:41:37-05:00",
+  "plan_id": "phase_0h_robustness_plan",
+  "plan_version": "1.0.0",
+  "plan_sha256": "1f932b278de41dc14154191833f45b5fcf55f3b5a01edd7a661ddcbcf2f556bf",
+  "cell_count": 92,
+  "initial_trials_per_cell": 100,
+  "initial_trial_count": 9200,
+  "expected_optimizer_invocations": 26200,
+  "optimizer_count_definition": "One optimizer invocation is one regional xps.fitSpectrum call. Standard trials use two regions; order/bound cells run paired pipelines; family 12 is composition-only; combined cells retain 5/10 starts.",
+  "aggregate_trials_executed": 0,
+  "fixture_trials_executed": 0,
+  "fixture_generation_count": 92,
+  "matlab_version": "25.2.0.3150157 (R2025b) Update 4",
+  "platform": "PCWIN64",
+  "toolbox_versions": [
+    {
+      "name": "Antenna Toolbox",
+      "version": "25.2",
+      "release": "(R2025b)",
+      "date": "28-Jul-2025"
+    },
+    {
+      "name": "MATLAB",
+      "version": "25.2",
+      "release": "(R2025b)",
+      "date": "28-Jul-2025"
+    },
+    {
+      "name": "Optimization Toolbox",
+      "version": "25.2",
+      "release": "(R2025b)",
+      "date": "28-Jul-2025"
+    }
+  ],
+  "rng_algorithm": "twister",
+  "seed_formula": "100000000*familyID + 100000*cellIndex + 100*trialID + streamID",
+  "git_commit": "dc2fe266e5c1be6708f8ea0ddd9b8e5b3eaf5d46",
+  "git_worktree_status": "dirty",
+  "git_tracked_diff_sha256": "419256f06437251848c430f7e9a2999cc6c4f485a183591a8d2ccf25e32aa822",
+  "files": [
+    {
+      "path": "+xps/buildQuantificationScaling.m",
+      "sha256": "97fe058cc8b4b9880d915b3f581d5a193c3e720296e3032fbc81948aa277d208"
+    },
+    {
+      "path": "+xps/calculateComposition.m",
+      "sha256": "e64736ef463f008865208bf1745398d850b2084d6c134a3d48f8a8b5cd77703b"
+    },
+    {
+      "path": "+xps/calculateFitMetrics.m",
+      "sha256": "0b77b7e9d20aa12d12d77cdd1612f7ace4032f9c5573aedcd4770538acfb220f"
+    },
+    {
+      "path": "+xps/classifyF1sPeaks.m",
+      "sha256": "8bc179e2d67018fecc8a5ea90434ce9665fa290d832c6165446411a43a0e5df7"
+    },
+    {
+      "path": "+xps/estimateAsLS.m",
+      "sha256": "dd36a0c0e4d93fe1bb7159ba1aa8950d76e4b9799e0c7f39775107c2dc1ebce2"
+    },
+    {
+      "path": "+xps/estimateBackground.m",
+      "sha256": "e7ee9fb6e1349e23c2b7ebd2703ed466c755e5c3df6dd12875a2bcf5e68249c7"
+    },
+    {
+      "path": "+xps/fitSpectrum.m",
+      "sha256": "423520d12abace1428c07b2038a76e4be11de9e57c65de4027d1cd03b998b215"
+    },
+    {
+      "path": "+xps/loadCompositionModelProfile.m",
+      "sha256": "3ad6d12e7e40cd720218b12099e4e65a9f07fb3347e68b80c44780aa2c7ecc4b"
+    },
+    {
+      "path": "+xps/loadReference.m",
+      "sha256": "a52b3ec91e06757b20be404babf138625df3d203f6bdca60d4d5c38293b76949"
+    },
+    {
+      "path": "+xps/loadSensitivityProfile.m",
+      "sha256": "2dc6ab5249f57837af27e4c99b3918cdc35bc21ce797a588618d3f90a17a653f"
+    },
+    {
+      "path": "+xps/plotFitComponents.m",
+      "sha256": "1a776048d65136c32b76c9860012dc4fdf93666725af47db6c9fd2ee0ca187de"
+    },
+    {
+      "path": "+xps/preprocessSpectrum.m",
+      "sha256": "58d19e9d5a8884489a00dcdab993ed37663bc89305b38571541e6a9e6019f13f"
+    },
+    {
+      "path": "+xps/readSpectrum.m",
+      "sha256": "097adc6d1f7fb2e5f65908d80db406bb3cdf341ed191b7a3d5ed66fc97af5b62"
+    },
+    {
+      "path": "+xpsh/appendLog.m",
+      "sha256": "5f2be83e6d2fbe9fff34d610ba3ec82b2d3d1351adbe1b6c4a96a7f2fa683ba3"
+    },
+    {
+      "path": "+xpsh/assertNoNewFigures.m",
+      "sha256": "83adcc0a0b8e2ff398cefbd0e6f490d76e28ebb88dcae63c9b56756e2cd81371"
+    },
+    {
+      "path": "+xpsh/buildPlan.m",
+      "sha256": "95a44f8fc367441607df67df33b71063f271b75ee262cd72d9433d2ca615a949"
+    },
+    {
+      "path": "+xpsh/completedTrials.m",
+      "sha256": "0c20b6a7f88762d80ee9642449bd867e8ff772babe82cc449f1506f8a646b7e4"
+    },
+    {
+      "path": "+xpsh/createManifest.m",
+      "sha256": "7511ca53dece494e0c5f59d9eceb8c8f394ed471e2f88cb984ed14b21553b11a"
+    },
+    {
+      "path": "+xpsh/enterNonGraphicalMode.m",
+      "sha256": "59f873d1573c04d4aa8c22a8e0ad4ecd00257f699efb63602d097eab85ae4073"
+    },
+    {
+      "path": "+xpsh/executePlan.m",
+      "sha256": "7e32734bdead77e6883a317afa7c9b2ce48112b7ac25820c287232c5a80d8feb"
+    },
+    {
+      "path": "+xpsh/executeTrial.m",
+      "sha256": "d857ac1b03e4c4dbcf873f3106c0d0e406b7a3c0deadc24c06d04e2673fea74d"
+    },
+    {
+      "path": "+xpsh/generateBackground.m",
+      "sha256": "ecff99e4c1cfbf62d37b2b8fd17bb60d41b5515ffb853371c22feca2fba5ea5c"
+    },
+    {
+      "path": "+xpsh/generateFixture.m",
+      "sha256": "69755e1631d2a59b1868e66be7d23b8823f39ea5b7835ed7f5574e944ba858f7"
+    },
+    {
+      "path": "+xpsh/inspectRun.m",
+      "sha256": "2fd14c292987fdcc28c441096099d82daf72053b5fc4f0d2dee6d36edd812eea"
+    },
+    {
+      "path": "+xpsh/inventoryTable.m",
+      "sha256": "abaaa29aa1d4ab194820fcac75c13b714cfea648eda37dafc8e1db480133b8c7"
+    },
+    {
+      "path": "+xpsh/prepareRun.m",
+      "sha256": "cb610b4de86518dc64e5f74c8853fcc2197fe93bde52d1e1024a7816b9f7f519"
+    },
+    {
+      "path": "+xpsh/residualAutocorrelation.m",
+      "sha256": "9dc3d9e67e275261279a7d7f0fde1bb5537715b81789e5213e61e9030a21a2e1"
+    },
+    {
+      "path": "+xpsh/seedFor.m",
+      "sha256": "0cedd6d09ed4c56780908f72d94a5c587efd55e1cfa28633ec4ae1e37a03dd90"
+    },
+    {
+      "path": "+xpsh/seedSchedule.m",
+      "sha256": "a70546abfb8c86de3c8168c58632af5e970202343d9fce68b378746b9d771b3c"
+    },
+    {
+      "path": "+xpsh/sha256File.m",
+      "sha256": "31b6f088f794e5fdc980c9f73bca520d537c3d147d125f848b84b94da8f95886"
+    },
+    {
+      "path": "+xpsh/sha256Text.m",
+      "sha256": "e53690e51fe88f6dc67d8538e5c0a0dca8b181cad04001b7de4aa3bb3cd0dfb9"
+    },
+    {
+      "path": "+xpsh/summarizeValues.m",
+      "sha256": "c88b7c484fabda36ea1c06425c84df57c4cd640af07b591010253f3179e6564c"
+    },
+    {
+      "path": "+xpsh/trialResultSchema.m",
+      "sha256": "48672aa10bc22239599587882f0bb2a7c5eb7a7a1f13f86d8dec2cf1004d71c3"
+    },
+    {
+      "path": "+xpsh/trialSeeds.m",
+      "sha256": "9bd152532b5661cdfa5927fe5870ec671074e29db01579ab5bc38ca308f40d1e"
+    },
+    {
+      "path": "+xpsh/validateFixture.m",
+      "sha256": "0dc000f2a7ae3245a48057d87173aa5edb3eda9a1baf3984c9a26d2b44f6474e"
+    },
+    {
+      "path": "+xpsh/verifyCheckpointSeeds.m",
+      "sha256": "b1e70028462a1811fcc880be65d9b54951f9668cbf47b5532ab4e4911675dd67"
+    },
+    {
+      "path": "+xpsh/wilsonInterval.m",
+      "sha256": "42234bc075effc9abefdae32b706f2b665ef7933d6367258fb6d618e04236326"
+    },
+    {
+      "path": "+xpsh/writeCellCheckpoint.m",
+      "sha256": "88dea7b57049ad17d39032d734eb883283f6bb1ed456403a29ca8632af3ceaa1"
+    },
+    {
+      "path": "+xpsh/writeCheckpoint.m",
+      "sha256": "7f6ab2786895291f7f8e154be168235915f1f4a76d981d3c4178d989adef0e62"
+    },
+    {
+      "path": "+xpsh/writeJsonAtomic.m",
+      "sha256": "0c09cdf78a777805596e97ad10d84e03106738de79b44e0c1668b5244d42da25"
+    },
+    {
+      "path": "PHASE_0H_PLAN_LOCK_v1.0.0.json",
+      "sha256": "011ff0957135809da2ce428a7f55b9feafe2a79bb1cb251dbf6b3eae5eb7c3c4"
+    },
+    {
+      "path": "PHASE_0H_TEST_PLAN_v1.0.0.md",
+      "sha256": "1f932b278de41dc14154191833f45b5fcf55f3b5a01edd7a661ddcbcf2f556bf"
+    },
+    {
+      "path": "config/composition/ruoff_primary_models_v1.json",
+      "sha256": "122fd348ceaa0c1d627017e29874b935838e89daabfb886d5a33251f034463a6"
+    },
+    {
+      "path": "config/sensitivity/legacy_project_sf4p4118_v1.json",
+      "sha256": "c92e3461e540fe482225992dd571929254ce3b15ae7c0ca7761c2ce21feb2d64"
+    },
+    {
+      "path": "config/sensitivity/ruoff_reproduction_sf3p95_v1.json",
+      "sha256": "a726c19b85eb2ffdd7af04aca43341bc4d2f592de59cca06922014a1a249722d"
+    },
+    {
+      "path": "config/sensitivity/thermo_k_alpha_sf4p118_v1.json",
+      "sha256": "817067e9544b599a32bb0550fdd4ca9e5fcc7fdb05c9c95031255d9f94eb6b1e"
+    },
+    {
+      "path": "config/test/ruoff_like_sample_A_synthetic_v1.json",
+      "sha256": "1a2de25bc4b5474cf5495be455a2ae554bd58e4de039a8740b3848b4d5c6e0a5"
+    },
+    {
+      "path": "generatePhase0HSummaries.m",
+      "sha256": "49afc8d3a6b9f13f9992593d85a25d4cc6e64b26b13b1b493337b521fc293725"
+    },
+    {
+      "path": "getPhase0HRunStatus.m",
+      "sha256": "a50de2150097a00efbd06458100eadee1dfb04cc80ad88c32fecc6a70700e547"
+    },
+    {
+      "path": "reference/sample_A_ruoff_v1.json",
+      "sha256": "867861cbdb01864fe0c37b91ba8f56cd3b17a242cf93c47c6d6068811de97a90"
+    },
+    {
+      "path": "reference/sample_B_ruoff_v1.json",
+      "sha256": "c3710fa39af016d4560655ff3baebf646d36bfb560097a79349ae127c9134435"
+    },
+    {
+      "path": "reference/sample_C_ruoff_v1.json",
+      "sha256": "dd121beb89f7cdb715fb38ece1f646c79eedb63181ee8750326b5321eec91753"
+    },
+    {
+      "path": "runPhase0HExecutionSmokeTest.m",
+      "sha256": "28fe10ee9be7b88a7ad7b09f356eb2a02bdf5bb0bdb44da4037e5ea1010e34b5"
+    },
+    {
+      "path": "runPhase0HFormal.m",
+      "sha256": "374a6290d3ebdb8768e9ba26a3adcc9b04115bc2582957be0d90b43c35fcc6ab"
+    },
+    {
+      "path": "xps_backgrounds.m",
+      "sha256": "8cca11c9b4c528c8b2c9207887d449c59ef8aaf690721c159edd5ec026d58a7e"
+    }
+  ],
+  "code_config_fingerprint": "93c6ad3a88ba0245be2043c06ca20c0adb62033989f051a6e71e340d31e292b4",
+  "run_fingerprint": "1f932b278de41dc14154191833f45b5fcf55f3b5a01edd7a661ddcbcf2f556bf:93c6ad3a88ba0245be2043c06ca20c0adb62033989f051a6e71e340d31e292b4",
+  "execution": {
+    "plotting_enabled": false,
+    "default_figure_visibility": "off",
+    "plotting_policy": "optimizer trials never call plotting functions"
+  },
+  "seed_namespace": "frozen_phase0h_v1_seed_schedule"
+}

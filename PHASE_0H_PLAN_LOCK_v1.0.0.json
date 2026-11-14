@@ -1,0 +1,22 @@
+{
+  "plan_id": "phase_0h_robustness_plan",
+  "plan_version": "1.0.0",
+  "status": "frozen",
+  "frozen_date": "2026-10-05",
+  "approval_basis": "Mentor-approved Phase 0H direction and revised observed-rate gates supplied by the project owner on 2026-10-05.",
+  "document": "PHASE_0H_TEST_PLAN_v1.0.0.md",
+  "sha256": "1f932b278de41dc14154191833f45b5fcf55f3b5a01edd7a661ddcbcf2f556bf",
+  "initial_cell_count": 92,
+  "initial_trials_per_cell": 100,
+  "initial_trial_count": 9200,
+  "aggregate_trials_executed": 0,
+  "harness_status": "implemented_execution_smoke_validated",
+  "dry_run_date": "2026-10-13",
+  "dry_run_fixture_count": 92,
+  "expected_initial_optimizer_invocations": 26200,
+  "execution_smoke_date": "2026-10-13",
+  "execution_smoke_cells": 2,
+  "execution_smoke_trials": 4,
+  "execution_smoke_optimizer_invocations": 12,
+  "formal_trials_executed": 0
+}

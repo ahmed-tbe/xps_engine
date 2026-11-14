@@ -1,0 +1,26 @@
+{
+  "cell_key": "F05_S3_extra_fit_C1s",
+  "family_id": 5,
+  "family_name": "MissingUnnecessaryPeaks",
+  "gate": "C",
+  "first_trial_id": 101,
+  "last_trial_id": 400,
+  "extension_trials": 300,
+  "final_combined_N": 400,
+  "error_trials": 0,
+  "successful_trials": 300,
+  "converged_trials": 300,
+  "convergence_wilson_95": {
+    "successes": 300,
+    "trials": 300,
+    "observed_rate": 1,
+    "confidence": 0.95,
+    "lower": 0.98735702877545384,
+    "upper": 0.99999999999999978,
+    "center": 0.99367851438772681,
+    "half_width": 0.006321485612273017
+  },
+  "optimizer_invocations": 600,
+  "elapsed_seconds": 21.090010100000033,
+  "status": "complete"
+}

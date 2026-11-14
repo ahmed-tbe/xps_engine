@@ -1,0 +1,26 @@
+{
+  "cell_key": "F01_N1",
+  "family_id": 1,
+  "family_name": "Noise",
+  "gate": "A",
+  "first_trial_id": 101,
+  "last_trial_id": 102,
+  "extension_trials": 2,
+  "final_combined_N": 102,
+  "error_trials": 0,
+  "successful_trials": 2,
+  "converged_trials": 2,
+  "convergence_wilson_95": {
+    "successes": 2,
+    "trials": 2,
+    "observed_rate": 1,
+    "confidence": 0.95,
+    "lower": 0.34238022750665303,
+    "upper": 1,
+    "center": 0.67119011375332649,
+    "half_width": 0.32880988624667346
+  },
+  "optimizer_invocations": 0,
+  "elapsed_seconds": 0,
+  "status": "complete"
+}

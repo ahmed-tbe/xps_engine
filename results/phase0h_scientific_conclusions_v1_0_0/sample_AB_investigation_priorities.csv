@@ -1,0 +1,9 @@
+Issue,Evidence,RecommendedABInvestigation
+Peak shape,"Families 6 and 16 show Gaussian recovery degrades as pseudo-Voigt mixing increases.",Compare Gaussian and pseudo-Voigt residual/area stability without choosing on Sample C.
+Background selection,"Family 7 separates matched and mismatched background behavior; AsLS and curved/mismatched cases require scrutiny.",Compare physically plausible Linear/Shirley/Tougaard treatments and residual structure; do not rank across background families by AICc/BIC.
+Center/FWHM bounds,"Family 15 shows fitted results depend on permitted center/FWHM ranges.",Review recurring exact/near-bound components and test predeclared alternate bounds on Samples A/B only.
+Charging correction,"Family 10 shows common binding-energy shifts affect peak recovery and Model 2 classification/withholding.",Evaluate a common energy-reference correction before F1s positional classification.
+F1s positional classification,"Families 10 and 13 show the strict semi-covalent positional/label rule is consequential.",Audit the 686.7-686.9 eV rule after charging correction and retain withholding when classification is ambiguous.
+Substrate/interface fluorine,"Families 5 and 14 test F_other, substrate peaks, and shoulders; some cases are dangerous false-valids.",Inspect Sample A/B F1s for 681.3-681.6 eV interface F and 684/685.8 eV substrate/shoulder structure.
+Acquisition scaling,"Families 9 and 11 show numerical normalization invariance but physical acquisition-factor errors propagate to cross-region composition.",Recover acquisition metadata before using cross-region F/C; do not infer unity scaling.
+Multi-start fitting,"Family 2 compares one, five, and ten starts; use the evidence before choosing A/B development settings.",Use multi-start only if it improves recovery/robustness rather than residual alone.

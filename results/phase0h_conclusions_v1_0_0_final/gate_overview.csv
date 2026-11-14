@@ -1,0 +1,9 @@
+GateCategory,GateCode,Cells,Pass,Fail,Descriptive
+Gate A,A,11,0,11,0
+Gate A paired,A_paired,2,0,2,0
+Gate B,B,20,0,20,0
+Gate B paired,B_paired,1,0,1,0
+Gate C,C,45,22,23,0
+Order,Order,1,1,0,0
+Scale,Scale,4,2,2,0
+Descriptive only,C_descriptive,8,0,0,8

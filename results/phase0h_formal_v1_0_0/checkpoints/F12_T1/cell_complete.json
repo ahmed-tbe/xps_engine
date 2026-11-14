@@ -1,0 +1,24 @@
+{
+  "cell_key": "F12_T1",
+  "family_id": 12,
+  "family_name": "SensitivitySweep",
+  "planned_trials": 100,
+  "completed_trials": 100,
+  "error_trials": 100,
+  "successful_trials": 0,
+  "converged_trials": 0,
+  "convergence_wilson_95": {
+    "successes": 0,
+    "trials": 100,
+    "observed_rate": 0,
+    "confidence": 0.95,
+    "lower": 3.4694469519536142E-18,
+    "upper": 0.036993498206985678,
+    "center": 0.018496749103492839,
+    "half_width": 0.018496749103492836
+  },
+  "optimizer_invocations": 0,
+  "elapsed_seconds": 2.8258872,
+  "next_eligible_trial_id": null,
+  "status": "complete_with_recorded_errors"
+}

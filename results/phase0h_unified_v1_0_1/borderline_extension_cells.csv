@@ -1,0 +1,43 @@
+FamilyID,FamilyName,CellKey,Gate,GateStatus,ExtensionReasons
+1,Noise,F01_N1,A,fail,Peak deployable false-invalid; Composition deployable false-invalid; Overall deployable false-invalid
+1,Noise,F01_N2,A,fail,Peak deployable false-invalid; Composition deployable false-invalid; Overall deployable false-invalid
+1,Noise,F01_N3,B,fail,Composition deployable false-invalid
+2,InitialConditions,F02_I1,A,fail,Peak deployable false-invalid; Composition deployable false-invalid; Overall deployable false-invalid
+2,InitialConditions,F02_I2,B,fail,Composition deployable false-invalid; Overall deployable false-invalid
+2,InitialConditions,F02_I3,A,fail,Peak deployable false-invalid; Composition deployable false-invalid; Overall deployable false-invalid
+2,InitialConditions,F02_I4,A,fail,Peak deployable false-invalid; Composition deployable false-invalid
+3,PeakOrder,F03_O2,A,fail,Peak deployable false-invalid; Composition deployable false-invalid; Overall deployable false-invalid
+4,Overlap,F04_V2,B,fail,Peak deployable false-invalid
+4,Overlap,F04_V3,B,fail,Peak deployable false-invalid; Overall deployable false-invalid
+5,MissingUnnecessaryPeaks,F05_S1_zero_C1s_sp2_C_C,C,fail,Composition deployable false-valid; Overall deployable false-valid
+5,MissingUnnecessaryPeaks,F05_S1_zero_C1s_C_CF_sp3,C,fail,Composition deployable false-valid; Overall deployable false-valid
+5,MissingUnnecessaryPeaks,F05_S1_zero_C1s_C_F,C,fail,Peak deployable false-valid; Overall deployable false-valid
+5,MissingUnnecessaryPeaks,F05_S1_zero_C1s_C_CF23_C_O,C,fail,Composition deployable false-valid
+5,MissingUnnecessaryPeaks,F05_S1_zero_C1s_CF2,C,fail,Composition deployable false-valid; Overall deployable false-valid
+5,MissingUnnecessaryPeaks,F05_S1_zero_C1s_CF3,C,fail,Composition deployable false-valid; Overall deployable false-valid
+5,MissingUnnecessaryPeaks,F05_S1_zero_F1s_F_ionic,C,fail,Composition deployable false-valid; Overall deployable false-valid
+5,MissingUnnecessaryPeaks,F05_S1_zero_F1s_F_semi_covalent,C,fail,Composition deployable false-valid; Overall deployable false-valid
+5,MissingUnnecessaryPeaks,F05_S1_zero_F1s_F_covalent,C,fail,Composition deployable false-valid; Overall deployable false-valid
+5,MissingUnnecessaryPeaks,F05_S3_extra_fit_C1s,C,fail,Composition deployable false-valid; Overall deployable false-valid
+5,MissingUnnecessaryPeaks,F05_S3_extra_fit_F1s,C,fail,Composition deployable false-valid; Overall deployable false-valid
+5,MissingUnnecessaryPeaks,F05_S4_unmodelled_C,C,pass,Peak deployable false-valid; Composition deployable false-valid; Overall deployable false-valid
+5,MissingUnnecessaryPeaks,F05_S5_F_other_01,C,fail,Composition deployable false-valid
+5,MissingUnnecessaryPeaks,F05_S5_F_other_05,C,pass,Composition deployable false-valid
+6,PeakShape,F06_P1,A,fail,Composition deployable false-invalid; Overall deployable false-invalid
+6,PeakShape,F06_P2,B,fail,Composition deployable false-invalid
+7,Background,F07_B1,A,fail,Peak deployable false-invalid; Composition deployable false-invalid; Overall deployable false-invalid
+7,Background,F07_B3,A,fail,Composition deployable false-invalid
+7,Background,F07_B5,C,pass,Composition deployable false-valid
+7,Background,F07_B6,C,fail,Peak deployable false-valid; Composition deployable false-valid; Overall deployable false-valid
+7,Background,F07_B7,C,pass,Composition deployable false-valid
+8,WindowTruncation,F08_T_low_1.0,B,fail,Peak deployable false-invalid; Overall deployable false-invalid
+8,WindowTruncation,F08_T_low_2.0,B,fail,Peak deployable false-invalid; Overall deployable false-invalid
+8,WindowTruncation,F08_T_high_1.0,B,fail,Peak deployable false-invalid; Overall deployable false-invalid
+8,WindowTruncation,F08_T_both_0.5,B,fail,Peak deployable false-invalid; Overall deployable false-invalid
+10,ChargingShift,F10_G1,A,fail,Peak deployable false-invalid; Composition deployable false-invalid; Overall deployable false-invalid
+10,ChargingShift,F10_G2,B,fail,Composition deployable false-invalid
+14,SubstrateShoulder,F14_X1,C,fail,Composition deployable false-valid
+14,SubstrateShoulder,F14_X2,C,pass,Composition deployable false-valid
+15,BoundSensitivity,F15_W1,A_paired,fail,Peak deployable false-invalid; Composition deployable false-invalid; Overall deployable false-invalid
+15,BoundSensitivity,F15_W2,A_paired,fail,Peak deployable false-invalid; Composition deployable false-invalid; Overall deployable false-invalid
+16,CombinedStress,F16_C3,C,pass,Composition deployable false-valid

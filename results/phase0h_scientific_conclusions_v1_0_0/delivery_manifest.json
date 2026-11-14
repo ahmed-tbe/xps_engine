@@ -1,0 +1,22 @@
+{
+  "package_id": "phase0h_scientific_conclusions",
+  "package_version": "1.0.0",
+  "read_only_postprocessing": true,
+  "source_integrity_unchanged": true,
+  "sample_C_used": false,
+  "cells": 92,
+  "trials": 21800,
+  "families": 16,
+  "plots": 9,
+  "workbook_sheets": 11,
+  "source_summary_sha256": "2d90e57a7fffd284597f521637c5e18c2bfee22d6e212206692c62a3bb7bf301",
+  "source_provenance_sha256": "5b41766f2a30f4f44b17fb5cf9c70f9c71ff42c8bdcdc032cc0bae87fd62e9d7",
+  "report": {
+    "path": "PHASE_0H_SCIENTIFIC_CONCLUSIONS_v1.0.0.md",
+    "sha256": "03fd6c2b46a71711d62218b071bef21d2823e43318e5ddd64fbd596b6dd1bb6a"
+  },
+  "workbook": {
+    "path": "Phase_0H_Scientific_Conclusions_v1.0.0.xlsx",
+    "sha256": "ca5a994f04f86e4526f06680ec5419cde46b9c2e028be29ad612b20bde37b5a7"
+  }
+}

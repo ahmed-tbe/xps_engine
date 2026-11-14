@@ -1,0 +1,11 @@
+{
+  "profile_id": "legacy_project_sf4p4118_v1",
+  "profile_version": "1.0.0",
+  "S_C": 1.0,
+  "S_F": 4.4118,
+  "ratio_definition": "S_F/S_C",
+  "ratio_value": 4.4118,
+  "status": "legacy_locked",
+  "source_provenance": "Legacy project sensitivity factors recorded in the original Ruoff XPS model tuning report and legacy_current_v1.json.",
+  "intended_application": "Backward-compatible legacy regression and diagnostics only; not the new primary Ruoff-reproduction or Thermo K-Alpha profile."
+}

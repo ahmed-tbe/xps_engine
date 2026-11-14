@@ -1,0 +1,13 @@
+FailureCategory,CategoryType,FailingCellCount,AffectedTrialCount,ApplicableTrialDenominator,Interpretation
+center accuracy,frozen gate criterion,28,7132,20500,"Trials outside the frozen truth-accuracy criterion; categories can overlap."
+FWHM accuracy,frozen gate criterion,34,10289,20500,"Trials outside the frozen truth-accuracy criterion; categories can overlap."
+major peak area,frozen gate criterion,26,5412,20500,"Trials outside the frozen truth-accuracy criterion; categories can overlap."
+minor peak fraction,frozen gate criterion,26,4652,20500,"Trials outside the frozen truth-accuracy criterion; categories can overlap."
+F/C,frozen gate criterion,34,3593,20500,"Trials outside the frozen truth-accuracy criterion; categories can overlap."
+F-at.%,frozen gate criterion,33,2513,20500,"Trials outside the frozen truth-accuracy criterion; categories can overlap."
+false-valid,frozen gate criterion,23,1941,20500,"Trials outside the frozen truth-accuracy criterion; categories can overlap."
+false-invalid,frozen gate criterion,21,1162,20500,"Trials outside the frozen truth-accuracy criterion; categories can overlap."
+misclassification,safety stress outcome,0,0,400,"Dangerously accepted label-mutated trials (all 400 injected trials were withheld, so the count is zero)."
+withholding,availability / protective behavior,77,12294,21800,"Composition outputs withheld by QC; this may be protective rather than a scientific failure."
+bound sensitivity,paired sensitivity criterion,3,900,900,"Paired bound-sensitivity trials evaluated; all three bound-sensitivity cells failed their paired criterion."
+convergence,optimizer outcome,0,1,21800,"Trials with a non-positive required regional optimizer exit flag."

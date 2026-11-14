@@ -1,0 +1,3 @@
+ModelID,QuantitativeABCells,ABMeetsAssignedLimits,ABFailsAssignedLimits,ABWithheldCells,CCells,CMeetsTierBLimits,CFailsTierBLimits,CWithheldCells,WorstMedianFCError_rel,WorstP95FCError_rel,WorstMedianFAtError_pp,WorstP95FAtError_pp
+ruoff_c1s_main_cf_v1,34,15,19,0,45,33,6,6,0.96715447402127,0.995120121112837,30.4525184611609,31.7439596850877
+ruoff_c1s_f1s_semi_sf3p95_v1,34,27,3,4,45,20,5,20,0.145120125458211,0.195592156786968,1.99321042975341,2.66420193883216

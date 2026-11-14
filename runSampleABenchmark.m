@@ -1,4 +1,4 @@
-function report = runSampleABenchmark(backgroundMethod)
+function report = runSampleABenchmark(backgroundMethod,sensitivityProfileID)
 %RUNSAMPLEABENCHMARK Standardized exploratory C1s+F1s Sample A report.
 %
 % This runner does not tune bounds, sensitivity factors, peak count,
@@ -8,6 +8,7 @@ function report = runSampleABenchmark(backgroundMethod)
 
 arguments
     backgroundMethod (1,1) string = "linear"
+    sensitivityProfileID (1,1) string = "ruoff_reproduction_sf3p95_v1"
 end
 
 supported = ["linear", "shirley", "asls", "tougaard"];
@@ -23,9 +24,27 @@ referenceFile = fullfile(projectFolder, "reference", ...
     "sample_A_ruoff_v1.json");
 c1sFile = fullfile(projectFolder, "C1s_A.txt");
 f1sFile = fullfile(projectFolder, "F1s_A.txt");
+modelProfileFile = fullfile(projectFolder,"config","composition", ...
+    "ruoff_primary_models_v1.json");
+switch sensitivityProfileID
+    case "ruoff_reproduction_sf3p95_v1"
+        sensitivityProfileFile = fullfile(projectFolder,"config", ...
+            "sensitivity","ruoff_reproduction_sf3p95_v1.json");
+    case "thermo_k_alpha_sf4p118_v1"
+        sensitivityProfileFile = fullfile(projectFolder,"config", ...
+            "sensitivity","thermo_k_alpha_sf4p118_v1.json");
+    case "legacy_project_sf4p4118_v1"
+        sensitivityProfileFile = fullfile(projectFolder,"config", ...
+            "sensitivity","legacy_project_sf4p4118_v1.json");
+    otherwise
+        error("runSampleABenchmark:UnknownSensitivityProfile", ...
+            "Unknown sensitivity profile ID: %s",sensitivityProfileID);
+end
 
 cfg = jsondecode(fileread(configFile));
 cfg.preprocessing.background = backgroundMethod; % local, explicit override
+modelProfile = xps.loadCompositionModelProfile(modelProfileFile);
+sensitivityProfile = xps.loadSensitivityProfile(sensitivityProfileFile);
 
 % Production chain. Reference data are intentionally loaded only after
 % fitting so they cannot become optimizer inputs.
@@ -43,8 +62,8 @@ Ffit.peaks = xps.classifyF1sPeaks(Ffit.peaks, ...
 scaling = xps.buildQuantificationScaling(Cpre, Fpre, ...
     cfg.acquisition_scaling);
 comp = xps.calculateComposition(Cfit.peaks, Ffit.peaks, ...
-    cfg.sensitivity_factors.C1s, cfg.sensitivity_factors.F1s, ...
-    cfg.composition.alpha_ambiguous, scaling);
+    sensitivityProfile.S_C, sensitivityProfile.S_F, ...
+    cfg.composition.alpha_ambiguous, scaling,sensitivityProfile,modelProfile);
 
 reference = xps.loadReference(referenceFile);
 referencePeaks = asStructArray( ...
@@ -61,8 +80,7 @@ F1sResiduals = residualTable(Ffit);
 alpha = cfg.composition.alpha_ambiguous;
 derivedReference = deriveC1sReferenceModels(referencePeaks, alpha);
 c1sModelComparison = makeC1sModelComparison(comp, derivedReference, alpha);
-directReferenceComparison = makeDirectReferenceComparison(comp, ...
-    reference.direct_references.overall_sample_A.fluorine_atomic_percent);
+directReferenceComparison = makeDirectReferenceComparison(comp,reference);
 scalingTable = makeScalingTable(Cpre, Fpre, scaling);
 
 fprintf("========================================================================\n");
@@ -90,8 +108,12 @@ fprintf("F1s background range: [%.6g, %.6g]\n\n", ...
 fprintf("===== Normalization and acquisition scaling =====\n");
 disp(scalingTable);
 fprintf("Scaling status: %s\n", comp.crossRegionAreaScaleStatus);
-fprintf("Sensitivity factors (separate from both scales): SC=%.6g, SF=%.6g\n\n", ...
-    cfg.sensitivity_factors.C1s, cfg.sensitivity_factors.F1s);
+fprintf("Sensitivity profile: %s v%s (%s)\n", ...
+    sensitivityProfile.profile_id,sensitivityProfile.profile_version, ...
+    sensitivityProfile.status);
+fprintf("Sensitivity factors (separate from both scales): SC=%.6g, SF=%.6g\n", ...
+    sensitivityProfile.S_C,sensitivityProfile.S_F);
+fprintf("Intended application: %s\n\n",sensitivityProfile.intended_application);
 
 fprintf("===== C1s fitted components and direct Ruoff peak references =====\n");
 disp(c1sPeakTable);
@@ -106,25 +128,41 @@ fprintf("===== C1s calculation models vs values derived from Ruoff fractions ===
 fprintf("Weighted-model alpha = %.6g\n", alpha);
 disp(c1sModelComparison);
 
-overallRef = reference.direct_references.overall_sample_A;
-fprintf("===== Direct overall Ruoff references =====\n");
-fprintf("Direct fluorine reference: %.3f at.%% F\n", ...
-    overallRef.fluorine_atomic_percent);
+overallRef = reference.direct_references;
+fprintf("===== Model-specific Ruoff validation references =====\n");
 fprintf("Direct qualitative/stoichiometric reference: %s\n", ...
     string(overallRef.qualitative_stoichiometry));
-fprintf("These direct references are distinct from model-derived C1s values.\n");
+fprintf("Each primary prediction is compared only with its named benchmark set.\n");
 disp(directReferenceComparison);
 
-if comp.crossRegionValid
-    fprintf("C-bound C1s/F1s F/C=%.6g, F at.%%=%.4f, %s\n", ...
-        comp.carbonBound.F_over_C, comp.carbonBound.F_atpct, ...
-        comp.carbonBound.CxF);
-    fprintf("Total-F C1s/F1s F/C=%.6g, F at.%%=%.4f, %s\n", ...
-        comp.totalF.F_over_C, comp.totalF.F_atpct, comp.totalF.CxF);
+fprintf("Primary C1s main-C-F model: F/C=%.6g, F at.%%=%.4f, %s\n", ...
+    comp.primary.c1s_main_cf.F_over_C, ...
+    comp.primary.c1s_main_cf.F_atpct,comp.primary.c1s_main_cf.CxF);
+if comp.primary.c1s_f1s_semi.status == "quantitative"
+    fprintf("Primary semi-covalent C1s/F1s model: F/C=%.6g, F at.%%=%.4f, %s\n", ...
+        comp.primary.c1s_f1s_semi.F_over_C, ...
+        comp.primary.c1s_f1s_semi.F_atpct, ...
+        comp.primary.c1s_f1s_semi.CxF);
 else
-    fprintf("C-bound and total-F cross-region results WITHHELD.\n");
-    fprintf("Reason: %s\n", comp.crossRegionAreaScaleStatus);
+    fprintf("Primary semi-covalent C1s/F1s result WITHHELD.\n");
+    fprintf("Cross-region scale status: %s\n", ...
+        comp.primary.c1s_f1s_semi.acquisition_scaling.status);
+    fprintf("Primary-model QC warnings:\n");
+    disp(comp.primary.c1s_f1s_semi.QC.warnings);
+    fprintf(["The fitted Sample A semi-covalent center is %.3f eV; the " + ...
+        "configured primary window is %.3f-%.3f eV. Phase 0H charging/" + ...
+        "binding-energy-shift tests will quantify this strict-window sensitivity.\n"], ...
+        peakCenterByID(Ffit.peaks,"F_semi_covalent"), ...
+        modelProfile.models.c1s_f1s_semi.allowed_center_range_eV(1), ...
+        modelProfile.models.c1s_f1s_semi.allowed_center_range_eV(2));
 end
+fprintf("Legacy C1s diagnostic: F/C=%.6g, F at.%%=%.4f, %s\n", ...
+    comp.diagnostics.legacy_c1s.F_over_C, ...
+    comp.diagnostics.legacy_c1s.F_atpct,comp.diagnostics.legacy_c1s.CxF);
+fprintf("Weighted C1s diagnostic (alpha=%.6g): F/C=%.6g, F at.%%=%.4f, %s\n", ...
+    alpha,comp.diagnostics.weighted_c1s.F_over_C, ...
+    comp.diagnostics.weighted_c1s.F_atpct, ...
+    comp.diagnostics.weighted_c1s.CxF);
 
 printWarnings("C1s", Cfit.warnings);
 printWarnings("F1s", Ffit.warnings);
@@ -137,11 +175,16 @@ metadata = struct( ...
     "configProfile", string(cfg.profile_name), ...
     "configVersion", string(cfg.profile_version), ...
     "referenceFile", string(referenceFile), ...
+    "compositionModelProfileFile",string(modelProfileFile), ...
+    "sensitivityProfileFile",string(sensitivityProfileFile), ...
+    "sensitivityProfileID",string(sensitivityProfile.profile_id), ...
     "MATLABVersion", string(version), ...
     "generatedAt", datetime("now"));
 
 report = struct( ...
     "metadata", metadata, "configuration", cfg, "reference", reference, ...
+    "compositionModelProfile",modelProfile, ...
+    "sensitivityProfile",sensitivityProfile, ...
     "referenceDerivedFromC1sFractions", derivedReference, ...
     "C", C, "F", F, "Cpre", Cpre, "Fpre", Fpre, ...
     "Cfit", Cfit, "Ffit", Ffit, "scaling", scaling, ...
@@ -157,7 +200,8 @@ report = struct( ...
 resultsFolder = fullfile(projectFolder, "results");
 if ~exist(resultsFolder, "dir"), mkdir(resultsFolder); end
 resultFile = fullfile(resultsFolder, sprintf( ...
-    "Sample_A_benchmark_%s_exploratory.mat", char(backgroundMethod)));
+    "Sample_A_benchmark_%s_%s_exploratory.mat",char(backgroundMethod), ...
+    char(sensitivityProfile.profile_id)));
 save(resultFile, "report");
 fprintf("\nSaved %s\n", resultFile);
 
@@ -296,18 +340,57 @@ T = table(["Legacy C1s";"Weighted C1s"], [NaN;alpha], ...
     'DerivedRuoff_CxF','Fitted_CxF'});
 end
 
-function T = makeDirectReferenceComparison(comp, ruoffAtPct)
-models = ["Legacy C1s";"Weighted C1s"];
-predicted = [comp.legacy.F_atpct;comp.weighted.F_atpct];
-if comp.crossRegionValid
-    models = [models;"C-bound C1s/F1s";"Total-F C1s/F1s"];
-    predicted = [predicted;comp.carbonBound.F_atpct;comp.totalF.F_atpct];
+function T = makeDirectReferenceComparison(comp,reference)
+refs = reference.direct_references.model_specific_fluorine_atomic_percent;
+mainRef = refs.ruoff_c1s_main_cf_v1;
+semiRef = refs.ruoff_c1s_f1s_semi_sf3p95_v1;
+[mainDisplay,mainLower,mainUpper] = referenceDisplay(mainRef);
+[semiDisplay,semiLower,semiUpper] = referenceDisplay(semiRef);
+modelID = ["ruoff_c1s_main_cf_v1";"ruoff_c1s_f1s_semi_sf3p95_v1"];
+status = [comp.primary.c1s_main_cf.status; ...
+    comp.primary.c1s_f1s_semi.status];
+referenceValue = [mainDisplay;semiDisplay];
+referenceLower = [mainLower;semiLower];
+referenceUpper = [mainUpper;semiUpper];
+predicted = [comp.primary.c1s_main_cf.F_atpct; ...
+    comp.primary.c1s_f1s_semi.F_atpct];
+difference = [signedDistance(predicted(1),mainLower,mainUpper); ...
+    signedDistance(predicted(2),semiLower,semiUpper)];
+provenance = [string(mainRef.provenance);string(semiRef.provenance)];
+T = table(modelID,status,referenceValue,referenceLower,referenceUpper, ...
+    predicted,difference,provenance,VariableNames=["ModelID","Status", ...
+    "BenchmarkReference","ReferenceLower_pct","ReferenceUpper_pct", ...
+    "Predicted_F_atpct","SignedDistanceToReference_pctpt", ...
+    "ReferenceProvenance"]);
 end
-truth = repmat(ruoffAtPct,size(predicted));
-T = table(models,truth,predicted,predicted-truth, ...
-    100*(predicted-truth)./truth, ...
-    'VariableNames', {'Prediction','DirectRuoff_F_atpct', ...
-    'Predicted_F_atpct','Error_pp','RelativeError_pct'});
+
+function [displayText,lower,upper] = referenceDisplay(reference)
+if string(reference.reference_type) == "scalar"
+    lower = reference.value;
+    upper = reference.value;
+    displayText = compose("%.4g%%",lower);
+else
+    lower = reference.lower;
+    upper = reference.upper;
+    displayText = compose("%.4g-%.4g%%",lower,upper);
+end
+end
+
+function value = signedDistance(predicted,lower,upper)
+if ~isfinite(predicted)
+    value = NaN;
+elseif predicted < lower
+    value = predicted-lower;
+elseif predicted > upper
+    value = predicted-upper;
+else
+    value = 0;
+end
+end
+
+function center = peakCenterByID(peaks,id)
+idx = find(string({peaks.id}) == id,1);
+if isempty(idx), center = NaN; else, center = peaks(idx).center_eV; end
 end
 
 function T = makeScalingTable(Cpre,Fpre,scaling)

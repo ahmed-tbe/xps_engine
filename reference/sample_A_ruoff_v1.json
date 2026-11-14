@@ -1,15 +1,18 @@
 {
   "reference_id": "ruoff_sample_A_v1",
-  "reference_version": "1.0.0",
+  "reference_version": "1.1.0",
+  "sample_id": "A",
   "usage": "reference_only_never_optimizer_input",
   "provenance": {
-    "source_description": "Ruoff Sample A reference values supplied by the project owner and previously embedded in the project Phase 1 comparison script.",
-    "project_record": "CxF_calculation_data/Ruoff_XPS_Model_Tuning_Report.docx",
-    "bibliographic_locator_status": "The underlying Ruoff publication figure/table locator is not present in the current workspace and must be added when available.",
-    "recorded_by_project": "2026-09-02"
+    "source_description": "Ruoff Sample A reference values recorded by the project; values are evaluation/reporting inputs and never optimizer inputs.",
+    "project_report": "CxF_calculation_data/Ruoff_XPS_Model_Tuning_Report.docx",
+    "benchmark_table": "CxF_calculation_data/Degree of fluorination.pptx, slide 9",
+    "mentor_definition_record": "Mentor feedback approved 2026-10-05",
+    "bibliographic_locator_status": "The underlying Ruoff publication figure/table locator is not present in the current workspace and must be added when available."
   },
   "direct_references": {
     "C1s_normal_emission": {
+      "fractions_complete": true,
       "fraction_unit": "percent_of_fitted_C1s_area",
       "center_unit": "eV",
       "peaks": [
@@ -21,11 +24,45 @@
         {"id": "CF3", "center_eV": 292.6, "fraction_percent": 1.0}
       ]
     },
-    "overall_sample_A": {
-      "fluorine_atomic_percent": 32.0,
-      "fluorine_reference_description": "Ruoff fluorine reference supplied by the project reference",
-      "qualitative_stoichiometry": "essentially C2F",
-      "note": "The 32 at.% value and qualitative C2F statement are direct project references. Values produced by legacy or weighted formulas from the C1s peak fractions are derived model values and are reported separately."
+    "main_C_F_fraction": {
+      "fraction": 0.47,
+      "peak_id": "C_F",
+      "source": "mentor-approved Ruoff Sample A C1s main C-F fraction"
+    },
+    "model_specific_fluorine_atomic_percent": {
+      "ruoff_c1s_main_cf_v1": {
+        "reference_type": "scalar",
+        "value": 32.0,
+        "unit": "atomic_percent_F",
+        "provenance": "Mentor-supplied Sample A validation reference for the main-C-F C1s reproduction model, confirmed 2026-10-13."
+      },
+      "ruoff_c1s_f1s_semi_sf3p95_v1": {
+        "reference_type": "scalar",
+        "value": 32.0,
+        "unit": "atomic_percent_F",
+        "provenance": "Mentor-supplied Sample A validation reference for the semi-covalent F1s/C1s Ruoff-reproduction model, confirmed 2026-10-13."
+      }
+    },
+    "qualitative_stoichiometry": "essentially C2F"
+  },
+  "project_benchmark_inputs": {
+    "source": "Degree of fluorination.pptx, slide 9; integrated-area values copied without alteration",
+    "semi_covalent_F1s_area": 26373.86,
+    "total_C1s_area": 14970.0161,
+    "software_normalization_scale_status": "areas are treated as source-level restored benchmark areas",
+    "acquisition_scale_status": "not documented for the raw experimental spectra",
+    "ruoff_figure_specific_correction": {
+      "status": "not documented in the available project sources",
+      "applied_in_fixture": false,
+      "production_engine_usage": "prohibited; benchmark-only metadata"
     }
+  },
+  "model_applied_to_reference": {
+    "ruoff_c1s_main_cf_v1": {"F_over_C": 0.47, "F_atpct": 31.97278911564626},
+    "ruoff_c1s_f1s_semi_sf3p95_v1": {"F_over_C": 0.44602000009061316, "F_atpct": 30.84466328699906}
+  },
+  "raw_data_files": {
+    "C1s": "CxF_calculation_data/Ruoff group raw data/C1s_A.txt",
+    "F1s": "CxF_calculation_data/Ruoff group raw data/F1s_A.txt"
   }
 }

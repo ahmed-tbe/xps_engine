@@ -1,0 +1,201 @@
+{
+  "schema_id": "xps_ab_model_development_candidate_matrix",
+  "version": "0.1.1",
+  "status": "review_draft_not_frozen",
+  "created_date": "2026-10-17",
+  "purpose": "Predeclare the minimum one-factor-at-a-time Sample A/B candidate matrix before either sample is fitted.",
+  "data_firewall": {
+    "development_samples": ["A", "B"],
+    "blind_samples": ["C"],
+    "load_published_composition_during_fit_or_selection": false,
+    "load_sample_C_raw_or_derived_data": false,
+    "selection_uses_composition_reference_error": false
+  },
+  "frozen_composition_definitions": {
+    "primary_model_1": "ruoff_c1s_main_cf_v1",
+    "primary_model_2": "ruoff_c1s_f1s_semi_sf3p95_v1",
+    "sensitivity_profiles": [
+      "ruoff_reproduction_sf3p95_v1",
+      "thermo_k_alpha_sf4p118_v1"
+    ],
+    "diagnostic_formulas": ["weighted_c1s", "legacy_c1s"],
+    "may_be_used_to_rank_candidate_fits": false
+  },
+  "shared_preprocessing": {
+    "normalization": "max",
+    "restore_software_normalization_before_cross_region_quantification": true,
+    "background_parameters": {
+      "linear": {"n_points": 5},
+      "shirley": {"n_points": 5, "max_iterations": 50, "tolerance": 1e-5},
+      "asls": {"lambda": 1000000, "p": 0.01, "iterations": 20},
+      "tougaard": {"B": 2866, "C": 1643}
+    }
+  },
+  "peak_shapes": {
+    "gaussian": {
+      "parameter_count_per_peak": 3,
+      "status": "implemented"
+    },
+    "pseudo_voigt_shared_eta": {
+      "definition": "(1-eta)*area_normalized_gaussian + eta*area_normalized_lorentzian",
+      "eta_scope": "one fitted eta shared by every peak in one regional fit",
+      "eta_initial": 0.2,
+      "eta_lower": 0.0,
+      "eta_upper": 0.8,
+      "additional_parameter_count_per_region": 1,
+      "status": "requires implementation and unit tests before A/B fitting"
+    }
+  },
+  "bound_variants": {
+    "current": {
+      "definition": "Use config/legacy_current_v1.json unchanged."
+    },
+    "center_wide": {
+      "definition": "For each peak, subtract 0.25 eV from the current lower center bound and add 0.25 eV to the current upper center bound, limited only by the retained fitting window.",
+      "source": "Phase 0H Family 15 W1",
+      "production_bounds_changed": false
+    },
+    "fwhm_wide": {
+      "definition": "For each peak, widen each side of the current FWHM interval by 25% of its current span while retaining a strictly positive lower bound.",
+      "current_interval_eV": [0.75, 2.0],
+      "test_interval_eV": [0.4375, 2.3125],
+      "source": "Phase 0H Family 15 W2",
+      "production_bounds_changed": false
+    }
+  },
+  "unresolved_bound_decision": {
+    "peak_id": "C_CF23_C_O",
+    "ruoff_reported_position_eV_approx": 287.3,
+    "legacy_lower_bound_eV": 288.1,
+    "center_wide_lower_bound_eV": 287.85,
+    "legacy_contains_reported_position": false,
+    "center_wide_contains_reported_position": false,
+    "mentor_question": "Should a separately and chemically justified center-bound candidate containing approximately 287.3 eV be added before freeze?",
+    "candidate_added_in_this_version": false
+  },
+  "regional_candidates": {
+    "C1s": [
+      {"id": "C01_G_L_CUR", "shape": "gaussian", "background": "linear", "bounds": "current", "role": "anchor"},
+      {"id": "C02_PV_L_CUR", "shape": "pseudo_voigt_shared_eta", "background": "linear", "bounds": "current", "role": "shape_probe"},
+      {"id": "C03_G_S_CUR", "shape": "gaussian", "background": "shirley", "bounds": "current", "role": "background_probe"},
+      {"id": "C04_G_T_CUR", "shape": "gaussian", "background": "tougaard", "bounds": "current", "role": "background_probe"},
+      {"id": "C05_G_A_CUR", "shape": "gaussian", "background": "asls", "bounds": "current", "role": "diagnostic_background_probe"},
+      {"id": "C06_G_L_CWIDE", "shape": "gaussian", "background": "linear", "bounds": "center_wide", "role": "paired_bound_probe"},
+      {"id": "C07_G_L_WWIDE", "shape": "gaussian", "background": "linear", "bounds": "fwhm_wide", "role": "paired_bound_probe"}
+    ],
+    "F1s": [
+      {"id": "F01_G_L_CUR", "shape": "gaussian", "background": "linear", "bounds": "current", "role": "anchor"},
+      {"id": "F02_PV_L_CUR", "shape": "pseudo_voigt_shared_eta", "background": "linear", "bounds": "current", "role": "shape_probe"},
+      {"id": "F03_G_S_CUR", "shape": "gaussian", "background": "shirley", "bounds": "current", "role": "background_probe"},
+      {"id": "F04_G_T_CUR", "shape": "gaussian", "background": "tougaard", "bounds": "current", "role": "background_probe"},
+      {"id": "F05_G_A_CUR", "shape": "gaussian", "background": "asls", "bounds": "current", "role": "diagnostic_background_probe"},
+      {"id": "F06_G_L_CWIDE", "shape": "gaussian", "background": "linear", "bounds": "center_wide", "role": "paired_bound_probe"},
+      {"id": "F07_G_L_WWIDE", "shape": "gaussian", "background": "linear", "bounds": "fwhm_wide", "role": "paired_bound_probe"}
+    ]
+  },
+  "initialization_stability_probe": {
+    "number_of_starts": 5,
+    "primary_start": "configured nominal initial values",
+    "diagnostic_start_count": 4,
+    "rng": "twister",
+    "seed_formula": "510000000 + 10000*sample_index + 100*region_index + 10*candidate_index + diagnostic_start_index",
+    "sample_index": {"A": 1, "B": 2},
+    "region_index": {"C1s": 1, "F1s": 2},
+    "draws": {
+      "center_eV": "U(max(lower, nominal-0.20), min(upper, nominal+0.20)); sample directly from the intersection, never clip",
+      "FWHM_eV": "LogU(max(lower, 0.85*nominal), min(upper, 1.15*nominal))",
+      "area_multiplier": "LogU(0.67, 1.50)",
+      "pseudo_voigt_eta": "U(0, 0.8) when applicable"
+    },
+    "selection_rule": "The starts are a stability diagnostic. A lower residual from an isolated chemically different basin is not evidence for selecting that basin."
+  },
+  "energy_calibration": {
+    "uncorrected_id": "E0_REPORTED_AXIS",
+    "independently_referenced_id": "E1_DOCUMENTED_COMMON_SHIFT",
+    "E1_eligibility": "Use only a documented acquisition correction or an independent calibration feature not chosen from the F1s semi-covalent peak and not chosen to improve published fluorination agreement.",
+    "apply_to": "All applicable regional energy axes from the same acquisition context, with raw and corrected centers both retained.",
+    "when_no_independent_reference_exists": "Retain E0, report absolute-position uncertainty, and withhold position-qualified Model 2."
+  },
+  "conditional_F1s_component_probes": [
+    {
+      "id": "F_OTHER_6815",
+      "chemical_hypothesis": "physisorbed, entrapped, or interface fluorine",
+      "initial_center_eV": 681.5,
+      "center_bounds_eV": [681.0, 682.0],
+      "FWHM_bounds_eV": [0.75, 2.0],
+      "include_in_model_2_numerator": false
+    },
+    {
+      "id": "F_SUBSTRATE_6840",
+      "chemical_hypothesis": "substrate or metal-associated fluorine distinct from the locked component",
+      "initial_center_eV": 684.0,
+      "center_bounds_eV": [683.6, 684.4],
+      "FWHM_bounds_eV": [0.75, 2.0],
+      "include_in_model_2_numerator": false
+    },
+    {
+      "id": "F_SHOULDER_6858",
+      "chemical_hypothesis": "resolved low-binding-energy shoulder",
+      "initial_center_eV": 685.8,
+      "center_bounds_eV": [685.4, 686.2],
+      "FWHM_bounds_eV": [0.75, 2.0],
+      "include_in_model_2_numerator": false
+    }
+  ],
+  "conditional_component_sequence": {
+    "sequence": [
+      "non-bootstrap residual/chemical/IC trigger",
+      "optional-probe candidate becomes bootstrap-eligible",
+      "bootstrap support test",
+      "component is considered supported/activated"
+    ],
+    "probe_execution_trigger": [
+      "The retained energy window covers the proposed component and both flanks.",
+      "The base-candidate residual has a reproducible signed feature spanning at least three adjacent points.",
+      "Feature amplitude is at least three times a truth-blind robust residual scale estimate declared before fitting.",
+      "The location has an independent chemical assignment; no component is added solely to improve a published composition value.",
+      "Within the same background, shape, window, and likelihood, delta BIC is <= -10 and delta AICc is <= -6 relative to the corresponding base candidate."
+    ],
+    "bootstrap_support_required_for_probe_execution": false,
+    "bootstrap_support_required_for_selected_configuration_adoption": true,
+    "bootstrap_support_test": [
+      "At least 450 of 500 bootstrap replicates are valid.",
+      "The fitted-area 95% interval has a lower endpoint greater than zero.",
+      "The component center and chemical label remain consistent with the proposed assignment."
+    ],
+    "maximum_optional_components_per_probe": 1,
+    "same_definition_applied_to_A_and_B": true
+  },
+  "cross_background_selection": {
+    "information_criteria_used_across_backgrounds": false,
+    "comparison_domain": "common max-normalized raw-intensity residual y_normalized-(background+peak_envelope)",
+    "hierarchy": [
+      "Tier-1 pass/fail",
+      "stable-basin start count, with 5/5 preferred to 4/5",
+      "residual-structure class and common-domain NRMSE/lag-1 autocorrelation",
+      "exact/near-bound and paired modest-bound sensitivity",
+      "bootstrap valid rate and interval-width identifiability",
+      "Linear parsimony tie-breaker"
+    ],
+    "residual_structure_pass": {"maximum_absolute_lag1_autocorrelation": 0.2, "minimum_runs_test_p": 0.05},
+    "material_residual_difference": {"relative_NRMSE_fraction": 0.05, "absolute_lag1_difference": 0.05},
+    "material_bound_difference": {"near_bound_count_difference_across_five_starts": 2},
+    "paired_stability_limits": {"center_eV": 0.15, "FWHM_relative": 0.25, "major_area_relative": 0.15, "minor_fraction_pp": 1.5},
+    "material_bootstrap_difference": {"valid_rate_pp": 5.0, "interval_width_relative": 0.10},
+    "practically_indistinguishable": "Same Tier-1 status and stable-start count; same residual class; NRMSE within 5% relative and absolute lag-1 correlation within 0.05; equal exact-bound count and near-bound count difference below two; paired changes inside all stability limits; bootstrap valid rate within 5 percentage points; every applicable interval width within 10% relative.",
+    "final_tie_breaker": "Prefer Linear."
+  },
+  "bootstrap_uncertainty_scope": {
+    "included": "Conditional empirical fit/model uncertainty under the selected peak, background, residual resampling, window, and bounds.",
+    "not_a_full_physical_xps_uncertainty_budget": true,
+    "separately_reported_systematics": ["binding-energy calibration", "acquisition scaling", "sensitivity factor"]
+  },
+  "explicit_exclusions": [
+    "No Cartesian crossing of shape, background, and bound variants.",
+    "No tightened-bound candidate: Phase 0H did not support one and recurring bound sensitivity makes tightening prior-dominated.",
+    "No combined center-and-FWHM widening: the corresponding severe-overlap Phase 0H probe was catastrophic and included the sole scientific nonconvergence.",
+    "No sensitivity-factor fitting or selection.",
+    "No candidate ranking using published Sample A/B fluorination values.",
+    "No Sample C access."
+  ]
+}

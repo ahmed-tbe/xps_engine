@@ -221,13 +221,16 @@ report = struct("configuration",cfg,"reference",reference, ...
 end
 
 function T = makeC1sFormulaConsistencyTable(composition,reference)
-direct = reference.direct_references.overall_sample_A;
-directFAtPct = direct.fluorine_atomic_percent;
+direct = reference.direct_references;
+mainReference = direct.model_specific_fluorine_atomic_percent. ...
+    ruoff_c1s_main_cf_v1;
+directFAtPct = mainReference.value;
 
 quantityClass = ["DirectRuoffReference"; ...
     "ModelAppliedToRuoffPublishedFractions"; ...
     "ModelAppliedToRuoffPublishedFractions"];
-candidateOrReference = ["RuoffSampleA";"WeightedC1s";"LegacyC1s"];
+candidateOrReference = ["RuoffSampleA_main_cf_reference"; ...
+    "WeightedC1s";"LegacyC1s"];
 alpha = [NaN;composition.weighted.alpha;NaN];
 fOverC = [NaN;composition.weighted.F_over_C; ...
     composition.legacy.F_over_C];

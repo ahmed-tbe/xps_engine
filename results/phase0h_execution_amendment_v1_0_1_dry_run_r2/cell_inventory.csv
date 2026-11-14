@@ -1,0 +1,12 @@
+FamilyID,FamilyName,CellIndex,CellID,CellKey,Gate,InitialTrials,Starts,PipelinesPerTrial,FitRequired,OptimizerInvocationsPerTrial,InitialOptimizerInvocations,Description
+10,ChargingShift,2,G2,F10_G2,B,100,1,1,1,2,200,"common U(-0.50,0.50) eV shift"
+12,SensitivitySweep,1,R1,F12_R1,C_descriptive,100,0,0,0,0,0,"ruoff_reproduction_sf3p95_v1 S_F multiplier 0.90"
+12,SensitivitySweep,2,R2,F12_R2,C_descriptive,100,0,0,0,0,0,"ruoff_reproduction_sf3p95_v1 S_F multiplier 0.95"
+12,SensitivitySweep,3,R3,F12_R3,Scale,100,0,0,0,0,0,"ruoff_reproduction_sf3p95_v1 S_F multiplier 1.00"
+12,SensitivitySweep,4,R4,F12_R4,C_descriptive,100,0,0,0,0,0,"ruoff_reproduction_sf3p95_v1 S_F multiplier 1.05"
+12,SensitivitySweep,5,R5,F12_R5,C_descriptive,100,0,0,0,0,0,"ruoff_reproduction_sf3p95_v1 S_F multiplier 1.10"
+12,SensitivitySweep,6,T1,F12_T1,C_descriptive,100,0,0,0,0,0,"thermo_k_alpha_sf4p118_v1 S_F multiplier 0.90"
+12,SensitivitySweep,7,T2,F12_T2,C_descriptive,100,0,0,0,0,0,"thermo_k_alpha_sf4p118_v1 S_F multiplier 0.95"
+12,SensitivitySweep,8,T3,F12_T3,Scale,100,0,0,0,0,0,"thermo_k_alpha_sf4p118_v1 S_F multiplier 1.00"
+12,SensitivitySweep,9,T4,F12_T4,C_descriptive,100,0,0,0,0,0,"thermo_k_alpha_sf4p118_v1 S_F multiplier 1.05"
+12,SensitivitySweep,10,T5,F12_T5,C_descriptive,100,0,0,0,0,0,"thermo_k_alpha_sf4p118_v1 S_F multiplier 1.10"

@@ -1,0 +1,93 @@
+FamilyID,FamilyName,CellKey,Gate,GateStatus,ConvergenceFailure,PeakCenterCriterion,FWHMCriterion,MajorPeakAreaCriterion,MinorPeakFractionCriterion,CompositionFCCriterion,FAtPercentCriterion,FalseValidCriterion,FalseInvalidCriterion,ChemicalLabelMisclassification,ChemicalLabelMisclassificationEvents,QCWithholding,QCWithholdingCount,BoundSensitivity,PairCriterion,ScaleCriterion,FailureReasons
+1,Noise,F01_N1,A,fail,0,0,1,0,0,1,1,0,0,0,0,1,176,0,0,0,FWHM criterion; composition F/C criterion; F-at.% criterion; QC withholding
+1,Noise,F01_N2,A,fail,0,1,1,1,1,1,1,0,0,0,0,1,181,0,0,0,peak-center criterion; FWHM criterion; major-peak area criterion; minor-peak fraction criterion; composition F/C criterion; F-at.% criterion; QC withholding
+1,Noise,F01_N3,B,fail,0,1,1,1,1,1,1,0,1,0,0,1,192,0,0,0,peak-center criterion; FWHM criterion; major-peak area criterion; minor-peak fraction criterion; composition F/C criterion; F-at.% criterion; false-invalid criterion; QC withholding
+2,InitialConditions,F02_I1,A,fail,0,1,1,1,1,1,1,0,0,0,0,1,191,0,0,0,peak-center criterion; FWHM criterion; major-peak area criterion; minor-peak fraction criterion; composition F/C criterion; F-at.% criterion; QC withholding
+2,InitialConditions,F02_I2,B,fail,0,1,1,1,1,1,1,0,1,0,0,1,342,0,0,0,peak-center criterion; FWHM criterion; major-peak area criterion; minor-peak fraction criterion; composition F/C criterion; F-at.% criterion; false-invalid criterion; QC withholding
+2,InitialConditions,F02_I3,A,fail,0,1,1,1,1,1,1,0,1,0,0,1,334,0,0,0,peak-center criterion; FWHM criterion; major-peak area criterion; minor-peak fraction criterion; composition F/C criterion; F-at.% criterion; false-invalid criterion; QC withholding
+2,InitialConditions,F02_I4,A,fail,0,1,1,1,1,1,1,0,0,0,0,1,336,0,0,0,peak-center criterion; FWHM criterion; major-peak area criterion; minor-peak fraction criterion; composition F/C criterion; F-at.% criterion; QC withholding
+3,PeakOrder,F03_O1,Order,pass,0,0,0,0,0,0,0,0,0,0,0,1,100,0,0,0,QC withholding
+3,PeakOrder,F03_O2,A,fail,0,1,1,1,1,1,1,0,0,0,0,1,216,0,0,0,peak-center criterion; FWHM criterion; major-peak area criterion; minor-peak fraction criterion; composition F/C criterion; F-at.% criterion; QC withholding
+4,Overlap,F04_V1,B,fail,0,1,1,1,1,1,0,0,1,0,0,0,0,0,0,0,peak-center criterion; FWHM criterion; major-peak area criterion; minor-peak fraction criterion; composition F/C criterion; false-invalid criterion
+4,Overlap,F04_V2,B,fail,0,1,1,1,1,1,1,0,1,0,0,1,400,0,0,0,peak-center criterion; FWHM criterion; major-peak area criterion; minor-peak fraction criterion; composition F/C criterion; F-at.% criterion; false-invalid criterion; QC withholding
+4,Overlap,F04_V3,B,fail,0,1,1,1,1,1,1,0,1,0,0,1,201,0,0,0,peak-center criterion; FWHM criterion; major-peak area criterion; minor-peak fraction criterion; composition F/C criterion; F-at.% criterion; false-invalid criterion; QC withholding
+4,Overlap,F04_V4,B,fail,0,1,1,1,1,1,1,0,1,0,0,1,59,0,0,0,peak-center criterion; FWHM criterion; major-peak area criterion; minor-peak fraction criterion; composition F/C criterion; F-at.% criterion; false-invalid criterion; QC withholding
+5,MissingUnnecessaryPeaks,F05_S1_zero_C1s_sp2_C_C,C,fail,0,0,0,0,0,0,0,1,0,0,0,1,198,0,0,0,false-valid criterion; QC withholding
+5,MissingUnnecessaryPeaks,F05_S1_zero_C1s_C_CF_sp3,C,fail,0,0,0,0,0,0,0,1,0,0,0,1,209,0,0,0,false-valid criterion; QC withholding
+5,MissingUnnecessaryPeaks,F05_S1_zero_C1s_C_F,C,fail,0,0,0,0,0,0,0,1,0,0,0,1,197,0,0,0,false-valid criterion; QC withholding
+5,MissingUnnecessaryPeaks,F05_S1_zero_C1s_C_CF23_C_O,C,fail,0,0,0,0,0,0,0,1,0,0,0,1,203,0,0,0,false-valid criterion; QC withholding
+5,MissingUnnecessaryPeaks,F05_S1_zero_C1s_CF2,C,fail,0,0,0,0,0,0,0,1,0,0,0,1,202,0,0,0,false-valid criterion; QC withholding
+5,MissingUnnecessaryPeaks,F05_S1_zero_C1s_CF3,C,fail,0,0,0,0,0,0,0,1,0,0,0,1,194,0,0,0,false-valid criterion; QC withholding
+5,MissingUnnecessaryPeaks,F05_S1_zero_F1s_F_ionic,C,fail,0,0,0,0,0,0,0,1,0,0,0,1,199,0,0,0,false-valid criterion; QC withholding
+5,MissingUnnecessaryPeaks,F05_S1_zero_F1s_F_semi_covalent,C,fail,0,0,0,0,0,0,0,1,0,0,0,1,364,0,0,0,false-valid criterion; QC withholding
+5,MissingUnnecessaryPeaks,F05_S1_zero_F1s_F_covalent,C,fail,0,0,0,0,0,0,0,1,0,0,0,1,207,0,0,0,false-valid criterion; QC withholding
+5,MissingUnnecessaryPeaks,F05_S2_omit_C1s_sp2_C_C,C,pass,0,0,0,0,0,0,0,0,0,0,0,1,100,0,0,0,QC withholding
+5,MissingUnnecessaryPeaks,F05_S2_omit_C1s_C_CF_sp3,C,fail,0,0,0,0,0,0,0,1,0,0,0,1,49,0,0,0,false-valid criterion; QC withholding
+5,MissingUnnecessaryPeaks,F05_S2_omit_C1s_C_F,C,pass,0,0,0,0,0,0,0,0,0,0,0,1,100,0,0,0,QC withholding
+5,MissingUnnecessaryPeaks,F05_S2_omit_C1s_C_CF23_C_O,C,fail,0,0,0,0,0,0,0,1,0,0,0,1,100,0,0,0,false-valid criterion; QC withholding
+5,MissingUnnecessaryPeaks,F05_S2_omit_C1s_CF2,C,fail,0,0,0,0,0,0,0,1,0,0,0,1,100,0,0,0,false-valid criterion; QC withholding
+5,MissingUnnecessaryPeaks,F05_S2_omit_C1s_CF3,C,fail,0,0,0,0,0,0,0,1,0,0,0,1,100,0,0,0,false-valid criterion; QC withholding
+5,MissingUnnecessaryPeaks,F05_S2_omit_F1s_F_ionic,C,fail,0,0,0,0,0,0,0,1,0,0,0,1,42,0,0,0,false-valid criterion; QC withholding
+5,MissingUnnecessaryPeaks,F05_S2_omit_F1s_F_semi_covalent,C,pass,0,0,0,0,0,0,0,0,0,0,0,1,100,0,0,0,QC withholding
+5,MissingUnnecessaryPeaks,F05_S2_omit_F1s_F_covalent,C,fail,0,0,0,0,0,0,0,1,0,0,0,1,22,0,0,0,false-valid criterion; QC withholding
+5,MissingUnnecessaryPeaks,F05_S3_extra_fit_C1s,C,fail,0,0,0,0,0,0,0,1,0,0,0,1,184,0,0,0,false-valid criterion; QC withholding
+5,MissingUnnecessaryPeaks,F05_S3_extra_fit_F1s,C,fail,0,0,0,0,0,0,0,1,0,0,0,1,188,0,0,0,false-valid criterion; QC withholding
+5,MissingUnnecessaryPeaks,F05_S4_unmodelled_C,C,pass,0,0,0,0,0,0,0,0,0,0,0,1,196,0,0,0,QC withholding
+5,MissingUnnecessaryPeaks,F05_S5_F_other_01,C,fail,0,0,0,0,0,0,0,1,0,0,0,1,218,0,0,0,false-valid criterion; QC withholding
+5,MissingUnnecessaryPeaks,F05_S5_F_other_05,C,pass,0,0,0,0,0,0,0,0,0,0,0,1,200,0,0,0,QC withholding
+5,MissingUnnecessaryPeaks,F05_S5_F_other_10,C,fail,0,0,0,0,0,0,0,1,0,0,0,1,58,0,0,0,false-valid criterion; QC withholding
+6,PeakShape,F06_P1,A,fail,0,1,1,1,1,1,1,0,1,0,0,1,60,0,0,0,peak-center criterion; FWHM criterion; major-peak area criterion; minor-peak fraction criterion; composition F/C criterion; F-at.% criterion; false-invalid criterion; QC withholding
+6,PeakShape,F06_P2,B,fail,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,peak-center criterion; FWHM criterion; major-peak area criterion; minor-peak fraction criterion; composition F/C criterion; F-at.% criterion
+6,PeakShape,F06_P3,B,fail,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,peak-center criterion; FWHM criterion; major-peak area criterion; minor-peak fraction criterion; composition F/C criterion; F-at.% criterion
+7,Background,F07_B1,A,fail,0,1,1,1,1,1,1,0,0,0,0,1,195,0,0,0,peak-center criterion; FWHM criterion; major-peak area criterion; minor-peak fraction criterion; composition F/C criterion; F-at.% criterion; QC withholding
+7,Background,F07_B2,A,fail,0,1,1,1,1,1,1,0,0,0,0,1,100,0,0,0,peak-center criterion; FWHM criterion; major-peak area criterion; minor-peak fraction criterion; composition F/C criterion; F-at.% criterion; QC withholding
+7,Background,F07_B3,A,fail,0,1,1,1,1,1,1,0,0,0,0,1,29,0,0,0,peak-center criterion; FWHM criterion; major-peak area criterion; minor-peak fraction criterion; composition F/C criterion; F-at.% criterion; QC withholding
+7,Background,F07_B4,C,pass,0,0,0,0,0,0,0,0,0,0,0,1,100,0,0,0,QC withholding
+7,Background,F07_B5,C,pass,0,0,0,0,0,0,0,0,0,0,0,1,241,0,0,0,QC withholding
+7,Background,F07_B6,C,fail,0,0,0,0,0,0,0,1,0,0,0,1,173,0,0,0,false-valid criterion; QC withholding
+7,Background,F07_B7,C,pass,0,0,0,0,0,0,0,0,0,0,0,1,393,0,0,0,QC withholding
+8,WindowTruncation,F08_T_low_0.5,B,fail,0,0,1,0,0,1,1,0,1,0,0,1,49,0,0,0,FWHM criterion; composition F/C criterion; F-at.% criterion; false-invalid criterion; QC withholding
+8,WindowTruncation,F08_T_low_1.0,B,fail,0,1,1,0,1,1,1,0,1,0,0,1,191,0,0,0,peak-center criterion; FWHM criterion; minor-peak fraction criterion; composition F/C criterion; F-at.% criterion; false-invalid criterion; QC withholding
+8,WindowTruncation,F08_T_low_2.0,B,fail,0,0,1,1,0,1,1,0,1,0,0,1,165,0,0,0,FWHM criterion; major-peak area criterion; composition F/C criterion; F-at.% criterion; false-invalid criterion; QC withholding
+8,WindowTruncation,F08_T_high_0.5,B,fail,0,1,1,0,0,1,1,0,1,0,0,1,50,0,0,0,peak-center criterion; FWHM criterion; composition F/C criterion; F-at.% criterion; false-invalid criterion; QC withholding
+8,WindowTruncation,F08_T_high_1.0,B,fail,0,0,1,0,1,1,1,0,1,0,0,1,233,0,0,0,FWHM criterion; minor-peak fraction criterion; composition F/C criterion; F-at.% criterion; false-invalid criterion; QC withholding
+8,WindowTruncation,F08_T_high_2.0,B,fail,0,0,1,0,0,1,1,0,1,0,0,1,63,0,0,0,FWHM criterion; composition F/C criterion; F-at.% criterion; false-invalid criterion; QC withholding
+8,WindowTruncation,F08_T_both_0.5,B,fail,0,1,1,0,0,1,1,0,1,0,0,1,220,0,0,0,peak-center criterion; FWHM criterion; composition F/C criterion; F-at.% criterion; false-invalid criterion; QC withholding
+8,WindowTruncation,F08_T_both_1.0,B,fail,0,1,1,0,0,1,1,0,1,0,0,1,52,0,0,0,peak-center criterion; FWHM criterion; composition F/C criterion; F-at.% criterion; false-invalid criterion; QC withholding
+8,WindowTruncation,F08_T_both_2.0,B,fail,0,0,1,1,0,1,1,0,1,0,0,1,65,0,0,0,FWHM criterion; major-peak area criterion; composition F/C criterion; F-at.% criterion; false-invalid criterion; QC withholding
+9,ScaleControls,F09_Q1,Scale,fail,0,0,0,0,0,0,0,0,0,0,0,1,100,0,0,1,QC withholding; scale criterion
+9,ScaleControls,F09_Q2,Scale,fail,0,0,0,0,0,0,0,0,0,0,0,1,100,0,0,1,QC withholding; scale criterion
+9,ScaleControls,F09_Q3,C,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+10,ChargingShift,F10_G1,A,fail,0,1,1,1,1,1,1,0,1,0,0,1,237,0,0,0,peak-center criterion; FWHM criterion; major-peak area criterion; minor-peak fraction criterion; composition F/C criterion; F-at.% criterion; false-invalid criterion; QC withholding
+10,ChargingShift,F10_G2,B,fail,0,1,1,1,1,1,1,0,1,0,0,1,336,0,0,0,peak-center criterion; FWHM criterion; major-peak area criterion; minor-peak fraction criterion; composition F/C criterion; F-at.% criterion; false-invalid criterion; QC withholding
+11,AcquisitionScaleError,F11_E1,C,pass,0,0,0,0,0,0,0,0,0,0,0,1,100,0,0,0,QC withholding
+11,AcquisitionScaleError,F11_E2,C,pass,0,0,0,0,0,0,0,0,0,0,0,1,100,0,0,0,QC withholding
+11,AcquisitionScaleError,F11_E3,C,pass,0,0,0,0,0,0,0,0,0,0,0,1,100,0,0,0,QC withholding
+11,AcquisitionScaleError,F11_E4,C,pass,0,0,0,0,0,0,0,0,0,0,0,1,100,0,0,0,QC withholding
+11,AcquisitionScaleError,F11_E5,C,pass,0,0,0,0,0,0,0,0,0,0,0,1,100,0,0,0,QC withholding
+11,AcquisitionScaleError,F11_E6,C,pass,0,0,0,0,0,0,0,0,0,0,0,1,100,0,0,0,QC withholding
+12,SensitivitySweep,F12_R1,C_descriptive,descriptive_no_acceptance_gate,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+12,SensitivitySweep,F12_R2,C_descriptive,descriptive_no_acceptance_gate,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+12,SensitivitySweep,F12_R3,Scale,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+12,SensitivitySweep,F12_R4,C_descriptive,descriptive_no_acceptance_gate,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+12,SensitivitySweep,F12_R5,C_descriptive,descriptive_no_acceptance_gate,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+12,SensitivitySweep,F12_T1,C_descriptive,descriptive_no_acceptance_gate,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+12,SensitivitySweep,F12_T2,C_descriptive,descriptive_no_acceptance_gate,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+12,SensitivitySweep,F12_T3,Scale,pass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+12,SensitivitySweep,F12_T4,C_descriptive,descriptive_no_acceptance_gate,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+12,SensitivitySweep,F12_T5,C_descriptive,descriptive_no_acceptance_gate,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+13,LabelMisclassification,F13_L1,C,pass,0,0,0,0,0,0,0,0,0,0,0,1,100,0,0,0,QC withholding
+13,LabelMisclassification,F13_L2,C,pass,0,0,0,0,0,0,0,0,0,0,0,1,100,0,0,0,QC withholding
+13,LabelMisclassification,F13_L3,C,pass,0,0,0,0,0,0,0,0,0,0,0,1,100,0,0,0,QC withholding
+13,LabelMisclassification,F13_L4,C,pass,0,0,0,0,0,0,0,0,0,0,0,1,100,0,0,0,QC withholding
+14,SubstrateShoulder,F14_X1,C,fail,0,0,0,0,0,0,0,1,0,0,0,1,217,0,0,0,false-valid criterion; QC withholding
+14,SubstrateShoulder,F14_X2,C,pass,0,0,0,0,0,0,0,0,0,0,0,1,183,0,0,0,QC withholding
+14,SubstrateShoulder,F14_X3,C,fail,0,0,0,0,0,0,0,1,0,0,0,1,100,0,0,0,false-valid criterion; QC withholding
+14,SubstrateShoulder,F14_X4,C,pass,0,0,0,0,0,0,0,0,0,0,0,1,100,0,0,0,QC withholding
+15,BoundSensitivity,F15_W1,A_paired,fail,0,1,1,1,1,1,1,0,0,0,0,1,211,1,0,0,peak-center criterion; FWHM criterion; major-peak area criterion; minor-peak fraction criterion; composition F/C criterion; F-at.% criterion; QC withholding; bound sensitivity
+15,BoundSensitivity,F15_W2,A_paired,fail,0,1,1,1,1,1,1,0,0,0,0,1,210,1,0,0,peak-center criterion; FWHM criterion; major-peak area criterion; minor-peak fraction criterion; composition F/C criterion; F-at.% criterion; QC withholding; bound sensitivity
+15,BoundSensitivity,F15_W3,B_paired,fail,0,1,1,1,1,1,1,0,1,0,0,1,100,1,0,0,peak-center criterion; FWHM criterion; major-peak area criterion; minor-peak fraction criterion; composition F/C criterion; F-at.% criterion; false-invalid criterion; QC withholding; bound sensitivity
+16,CombinedStress,F16_C1,B,fail,0,1,1,1,1,1,1,0,1,0,0,0,0,0,0,0,peak-center criterion; FWHM criterion; major-peak area criterion; minor-peak fraction criterion; composition F/C criterion; F-at.% criterion; false-invalid criterion
+16,CombinedStress,F16_C2,B,fail,0,1,1,1,1,1,1,0,0,0,0,1,100,0,0,0,peak-center criterion; FWHM criterion; major-peak area criterion; minor-peak fraction criterion; composition F/C criterion; F-at.% criterion; QC withholding
+16,CombinedStress,F16_C3,C,fail,0,0,0,0,0,0,0,1,0,0,0,1,363,0,0,0,false-valid criterion; QC withholding
+16,CombinedStress,F16_C4,C,pass,0,0,0,0,0,0,0,0,0,0,0,1,100,0,0,0,QC withholding

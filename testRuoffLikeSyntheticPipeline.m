@@ -50,7 +50,7 @@ function testC1sFormulaArithmeticFromPublishedFractions(testCase)
 report = runRuoffLikeSyntheticPipelineDemo(false,false);
 T = report.C1sFormulaConsistency;
 
-direct = T(T.CandidateOrReference == "RuoffSampleA",:);
+direct = T(T.CandidateOrReference == "RuoffSampleA_main_cf_reference",:);
 weighted = T(T.CandidateOrReference == "WeightedC1s",:);
 legacy = T(T.CandidateOrReference == "LegacyC1s",:);
 

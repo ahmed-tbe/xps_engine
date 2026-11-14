@@ -1,0 +1,65 @@
+{
+  "schema_id": "xps_ab_model_development_protocol_review_manifest",
+  "version": "0.1.1",
+  "status": "review_draft_not_frozen",
+  "created_date": "2026-10-17",
+  "authorization": "Protocol review only; real Sample A/B fitting is not authorized by this manifest.",
+  "supersedes": {
+    "version": "0.1.0",
+    "protocol_sha256": "f9de3037f526efaafeef047d08e018efac1ec959fd59cd144391d0cc4ceb1bc9",
+    "candidate_matrix_sha256": "4f94a387f46f6c138ec464b4e2d78b2b82f2c59947d2002abff4406a0a22d085"
+  },
+  "revision_scope": [
+    "Add the unresolved C_CF23_C_O 287.3 eV center-bound mentor decision without adding a candidate.",
+    "Separate optional-probe execution, bootstrap eligibility, bootstrap support, and selected-model activation.",
+    "Freeze a deterministic cross-background hierarchy and practical-indistinguishability definition.",
+    "Clarify that moving-block bootstrap is conditional fit/model uncertainty, with physical systematics reported separately."
+  ],
+  "artifacts": [
+    {
+      "path": "PHASE_1_AB_MODEL_DEVELOPMENT_PROTOCOL_v0.1.1.md",
+      "sha256": "f95f7bcf0a8c42a97ac178e3c250ec7d698ce598b1c651b58d60e28d7dc9f5be",
+      "role": "review protocol"
+    },
+    {
+      "path": "config/development/ab_candidate_matrix_v0.1.1.json",
+      "sha256": "70390c322100279afe8ef05d6e0a244d3355237836f8b3cab140f3b1d04361d3",
+      "role": "machine-readable candidate matrix"
+    }
+  ],
+  "read_only_sources": [
+    {
+      "path": "PHASE_0H_TEST_PLAN_v1.0.0.md",
+      "sha256": "1f932b278de41dc14154191833f45b5fcf55f3b5a01edd7a661ddcbcf2f556bf"
+    },
+    {
+      "path": "results/phase0h_scientific_conclusions_v1_0_0/PHASE_0H_SCIENTIFIC_CONCLUSIONS_v1.0.0.md",
+      "sha256": "03fd6c2b46a71711d62218b071bef21d2823e43318e5ddd64fbd596b6dd1bb6a"
+    },
+    {
+      "path": "results/phase0h_scientific_conclusions_v1_0_0/per_cell_summary.csv",
+      "sha256": "db52c8222b521534de80ef801f48a1b0e9173bdd7bac254e31cda57a059329b2"
+    },
+    {
+      "path": "config/legacy_current_v1.json",
+      "sha256": "2c868e9a8d5bc9e634d1ebebba07d716912a2cb9b7aef7db39c86b2923ab7481"
+    },
+    {
+      "path": "config/composition/ruoff_primary_models_v1.json",
+      "sha256": "122fd348ceaa0c1d627017e29874b935838e89daabfb886d5a33251f034463a6"
+    },
+    {
+      "path": "config/sensitivity/ruoff_reproduction_sf3p95_v1.json",
+      "sha256": "a726c19b85eb2ffdd7af04aca43341bc4d2f592de59cca06922014a1a249722d"
+    },
+    {
+      "path": "config/sensitivity/thermo_k_alpha_sf4p118_v1.json",
+      "sha256": "817067e9544b599a32bb0550fdd4ca9e5fcc7fdb05c9c95031255d9f94eb6b1e"
+    }
+  ],
+  "sample_access": {
+    "sample_A_spectra_opened": false,
+    "sample_B_spectra_opened": false,
+    "sample_C_spectra_or_results_opened": false
+  }
+}

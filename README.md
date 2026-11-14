@@ -1,93 +1,103 @@
-# Ruoff XPS CxF — first milestone
+# Ruoff XPS CxF pipeline
 
-This is a **legacy-baseline starter**, not the finished scientific model.
+This repository preserves the Phase 0G deterministic fitting pipeline and
+adds versioned composition models without using literature values as fitting
+constraints.
 
-## Goal
+The processing order is unchanged:
 
-For one Ruoff sample, reproduce the current six-component C1s / three-component F1s workflow as closely as the supplied report allows, then calculate:
+`import/configuration -> preprocessing/background -> peak fitting -> chemical classification -> composition -> QC/report`
 
-- locked legacy C1s F/C
-- provisional weighted C1s F/C
-- carbon-bound F1s/C1s F/C
-- total-F F1s/C1s F/C
-- F atomic %
-- C/F
-- CxF
+## Composition outputs
 
-The Ruoff reference values are **not used as fitting constraints**. Direct
-Sample A references live in `reference/sample_A_ruoff_v1.json`; model values
-derived from those peak fractions are calculated and labeled separately.
+`xps.calculateComposition` now separates mentor-approved primary models from
+preserved diagnostics:
 
-## Important distinction
+- `composition.primary.c1s_main_cf`: `F/C=A(C-F)/A(C,total)`;
+- `composition.primary.c1s_f1s_semi`: sensitivity-corrected semi-covalent
+  F1s area over total C1s area;
+- `composition.diagnostics.weighted_c1s`;
+- `composition.diagnostics.legacy_c1s`;
+- `composition.diagnostics.carbon_bound_f1s_previous`;
+- `composition.diagnostics.total_f1s`.
 
-`F/C` is a ratio.
+The old `weighted`, `legacy`, `carbonBound`, and `totalF` fields remain as
+deprecated aliases. `F/C` is a ratio; fluorine atomic percent is
+`100*(F/C)/(1+F/C)`.
 
-`F at.%` is:
+The primary F1s model selects exactly one peak by the chemical assignment
+`semi_covalent_F_C` and the approved 686.7-686.9 eV position window. It does
+not select by array index. The position window is loaded from
+`config/composition/ruoff_primary_models_v1.json`; it is not hardcoded in the
+calculation function. Cross-region results restore software normalization
+and acquisition scaling before sensitivity correction. If acquisition
+scaling is unknown, the result is marked `withheld` rather than assuming one.
 
-`F_at% = (F/C)/(1 + F/C) * 100`
+## Versioned profiles
 
-Therefore `F/C * 100` is **not** fluorine atomic percent.
+- `config/composition/ruoff_primary_models_v1.json`: primary equations and
+  selection rules.
+- `config/sensitivity/ruoff_reproduction_sf3p95_v1.json`: provisional Ruoff
+  reproduction profile (`S_C=1`, `S_F=3.95`), not a confirmed Ruoff
+  instrument factor.
+- `config/sensitivity/thermo_k_alpha_sf4p118_v1.json`: mentor-confirmed future
+  Thermo K-Alpha profile (`S_C=1`, `S_F=4.118`).
+- `config/sensitivity/legacy_project_sf4p4118_v1.json`: preserved legacy
+  regression profile (`S_C=1`, `S_F=4.4118`).
 
-## Current assumptions
+Profiles are explicit inputs. The composition layer rejects a versioned
+profile whose numeric factors do not match the numeric API arguments.
 
-From the supplied tuning report:
+## Reference fixtures and examples
 
-- C1s: six components
-- F1s: three components
-- normalization: max intensity
-- versioned default background: AsLS
-- supported configured backgrounds: linear, Shirley, AsLS, and Tougaard
-- fit unsmoothed data
-- S_C = 1.0
-- S_F = 4.4118
-- C4 legacy bounds remain 288.1–289.5 eV even though the report flags a reference position near 287.3 eV
-- F1s chemical assignment is based on fitted position, not peak index
+Versioned A-C fixtures are under `reference/`. Direct Ruoff/project values are
+separate from values calculated by applying a model. Sample A contains the
+complete available C1s center/fraction breakdown; Samples B and C explicitly
+record that this breakdown is unavailable instead of inferring it.
 
-The supplied report says the exact historical XPS Fit Lab peak shape is not documented in the material we have. This starter therefore exposes the peak shape explicitly and defaults to Gaussian because that is the current lab-development assumption. Do not call this the verified historical XPS Fit Lab implementation until the peak shape is confirmed.
-
-## Run the standardized Sample A benchmark
-
-Put this folder on the MATLAB path and run:
+Run deterministic reference arithmetic and profile examples with:
 
 ```matlab
-report = runSampleABenchmark("linear");
+summary = validateRuoffBenchmarkFixtures;
+profiles = runCompositionModelExamples;
 ```
 
-The explicit `"linear"` argument is a local exploratory choice. It does not
-change the JSON default. `runSingleSample.m` remains as a compatibility entry
-point and calls the same benchmark engine.
+Run the exploratory real Sample A benchmark with an explicit background and
+sensitivity profile:
 
-The supplied Sample A files contain energy and intensity columns only. The
-software max-normalization divisors are recorded and reversed, but C1s/F1s
-acquisition scaling is not present. Therefore the benchmark withholds physical
-cross-region F/C until acquisition factors and provenance are supplied.
+```matlab
+report = runSampleABenchmark("linear", "ruoff_reproduction_sf3p95_v1");
+```
 
-## Required MATLAB toolbox
+This does not tune bounds, peak count, backgrounds, or sensitivity factors.
+The raw C1s/F1s files do not document acquisition scaling, so the real
+cross-region primary result remains withheld. The C1s-only primary and
+diagnostic results are still reported.
 
-Optimization Toolbox (`lsqnonlin`).
+The current real Sample A Linear-background fit places the semi-covalent peak
+at approximately 686.53 eV, outside the strict 686.7-686.9 eV primary window.
+It therefore fails positional QC even independently of the missing acquisition
+scale. Phase 0H charging/global-binding-energy-shift cells G1/G2 explicitly
+quantify sensitivity to this criterion; the window is not widened here.
 
-## What to inspect first
+## Testing
 
-1. Are the raw spectra imported correctly?
-2. Does the energy direction look correct?
-3. Does the explicitly selected background look sensible?
-4. Do the fitted centers/FWHMs look chemically reasonable?
-5. Are any parameters pinned to bounds?
-6. Does the C1s legacy calculation reproduce the known legacy result once the fitted areas are matched?
-7. Only after that should we move to weighted and cross-region models.
+See `TESTING.md`. From the repository root:
 
-## Not yet implemented
+```matlab
+results = runtests(pwd,"IncludeSubfolders",true);
+assertSuccess(results);
+```
 
-- pseudo-Voigt mixing
-- automated multi-start fitting
-- stability sweeps
-- Excel output
-- blind/validation split
-- sensitivity-factor sweep
-- GUI/App Designer
+Optimization Toolbox (`lsqnonlin`) is required for fitting tests.
 
-Those belong after the legacy baseline is reproducible.
+## Phase 0H
 
-Planned candidate and robustness cases are tracked in `FUTURE_TESTS.md`,
-including the separate ~681.3-681.6 eV `F_other` assignment that is not part of
-the locked three-peak F1s model.
+The mentor-approved design is frozen in `PHASE_0H_TEST_PLAN_v1.0.0.md`, with
+its SHA-256 in `PHASE_0H_PLAN_LOCK_v1.0.0.json`. No Phase 0H Monte Carlo trial
+has been run. No harness existed when the composition update was implemented,
+so no dry-run was performed.
+
+Planned candidates, including a separate ~681.3-681.6 eV `F_other`
+assignment, remain tracked without altering the locked three-peak production
+model.

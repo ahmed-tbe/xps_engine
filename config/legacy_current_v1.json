@@ -4,7 +4,10 @@
   "peak_shape": "gaussian",
   "sensitivity_factors": {
     "C1s": 1.0,
-    "F1s": 4.4118
+    "F1s": 4.4118,
+    "profile_id": "legacy_project_sf4p4118_v1",
+    "profile_file": "config/sensitivity/legacy_project_sf4p4118_v1.json",
+    "status": "legacy_preserved_not_primary_ruoff_or_thermo_profile"
   },
   "preprocessing": {
     "normalization": "max",
@@ -21,7 +24,9 @@
     "tougaard_C": 1643
   },
   "composition": {
-    "alpha_ambiguous": 0.0
+    "alpha_ambiguous": 0.0,
+    "primary_model_profile_id": "ruoff_primary_composition_models_v1",
+    "primary_model_profile_file": "config/composition/ruoff_primary_models_v1.json"
   },
   "acquisition_scaling": {
     "definition": "recorded_raw_area = physical_area * acquisition_scale_factor",

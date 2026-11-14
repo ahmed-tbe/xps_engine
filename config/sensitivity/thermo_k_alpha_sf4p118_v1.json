@@ -1,0 +1,11 @@
+{
+  "profile_id": "thermo_k_alpha_sf4p118_v1",
+  "profile_version": "1.0.0",
+  "S_C": 1.0,
+  "S_F": 4.118,
+  "ratio_definition": "S_F/S_C",
+  "ratio_value": 4.118,
+  "status": "mentor_confirmed",
+  "source_provenance": "Mentor-confirmed Thermo K-Alpha sensitivity-factor ratio for the project's future experimental data.",
+  "intended_application": "Future experimental C1s/F1s quantification acquired on the project Thermo K-Alpha workflow; not Ruoff figure reproduction."
+}
